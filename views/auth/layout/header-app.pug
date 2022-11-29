@@ -1,0 +1,99 @@
+header.bg-yellow-400.p-4
+    .container.mx-auto.felx.justify-between.items-center.text-right
+        h1.text-2xl.text-white.font-extrabold.text-center Áridos y Construcciones 
+            h2.text-2xl.text-white.font-extrabold.text-center SOCAL 
+                span.font-normal.text-xs LTDA.
+            
+
+
+
+            nav.flex.items-center.justify-between.bg-yellow-400.p-1
+                .flex.items-center.flex-shrink-0.text-white.mr-4
+                    a(href='/mis-equipos')
+                        img.fill-current.h-12.w-12(width='54' height='54' viewbox='0 0 54 54' src="/uploads/socal.png" alt="image description")
+                    
+                div.justify-between.flex.space-x-1
+                    a.inline-block.text-sm.px-4.py-2.leading-none.rounded.text-white.border-white.mt-4(href='/auth/inicio' class='hover:border-transparent hover:text-white hover:bg-yellow-300 lg:mt-0 text-center') Inicio
+                   
+
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-building-bank m-auto" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <line x1="3" y1="21" x2="21" y2="21" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                            <polyline points="5 6 12 3 19 6" />
+                            <line x1="4" y1="10" x2="4" y2="21" />
+                            <line x1="20" y1="10" x2="20" y2="21" />
+                            <line x1="8" y1="14" x2="8" y2="17" />
+                            <line x1="12" y1="14" x2="12" y2="17" />
+                            <line x1="16" y1="14" x2="16" y2="17" />
+                          </svg>
+
+                        
+                    a.inline-block.text-sm.px-4.py-2.leading-none.rounded.text-white.border-white.mt-4(href='/auth/registro' class='hover:border-transparent hover:text-white hover:bg-yellow-300 lg:mt-0 text-center') Crear Cuenta
+                        
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-exclamation m-auto" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                          <circle cx="9" cy="7" r="4" />
+                          <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                          <line x1="19" y1="7" x2="19" y2="10" />
+                          <line x1="19" y1="14" x2="19" y2="14.01" />
+                        </svg>
+                       
+                
+                   
+
+
+//- div(class="sm:hidden")
+//-   label.sr-only(for='tabs') Select 
+//-   select#tabs.bg-yellow-400.border.border-yellow-400.text-white.text-sm.block.w-full(class='focus:ring-yellow-400 focus:border-yellow-400 p-2.5 dark:bg-yellow-400 dark:border-yellow-400 dark:placeholder-yellow-400 dark:text-white dark:focus:ring-yellow-400 dark:focus:border-yellow-400')
+//-     each categoria in categorias
+//-       option(value="categoria.id")= categoria.nombre
+     
+//- ul.hidden.text-sm.font-medium.text-center.text-white.rounded-lg.divide-x.divide-yellow-400.shadow(class='sm:flex dark:divide-yellow-400 dark:text-white')
+//-     li.w-full
+//-       a.inline-block.p-4.w-full.text-yellow-400.bg-yellow-400.active(href='/auth/categorias/1' class='focus:yellow-400  focus:outline-none dark:bg-yellow-400 dark:text-white' aria-current='page') Temuco
+//-     li.w-full
+//-       a.inline-block.p-4.w-full.bg-white(href='/auth/categorias/2' class='hover:text-yellow-400 hover:bg-gray-50 focus:yellow-400  focus:outline-none dark:hover:text-white dark:bg-yellow-400 dark:hover:bg-yellow-300') Lautaro
+//-     li.w-full
+//-       a.inline-block.p-4.w-full.bg-white(href='/auth/categorias/3' class='hover:text-yellow-400 hover:bg-gray-50 focus:yellow-400  focus:outline-none dark:hover:text-white dark:bg-yellow-400 dark:hover:bg-yellow-300') Valdivia
+//-     li.w-full
+//-       a.inline-block.p-4.w-full.bg-white(href='/auth/categorias/4' class='hover:text-yellow-400 hover:bg-gray-50 focus:yellow-400 focus:outline-none  dark:hover:text-white dark:bg-yellow-400 dark:hover:bg-yellow-300') Perquenco
+
+
+//- nav.bg-white.border-gray-200(class='dark:bg-indigo-600')
+//-   .flex.flex-wrap.justify-between.items-center.mx-auto.max-w-screen-xl.px-4(class='md:px-6 py-2.5')
+//-     a.flex.items-center(href='/auth/inicio')
+//-       span.self-center.text-xl.font-semibold.whitespace-nowrap
+//-     .flex.items-center
+//-       a.mr-6.text-sm.font-medium.text-gray-500.text-center(href='/auth/registro' class='dark:text-white hover:underline') Crear Cuenta
+//-       a.text-sm.font-medium.text-blue-600(href='/auth/login' class='dark:text-white hover:underline') Iniciar sesión
+//- nav.bg-gray-50(class='dark:bg-indigo-600 flex')
+//-   .max-w-screen-xl.px-4.py-3.mx-auto(class='md:px-6')
+//-     .flex.items-center
+//-       ul.flex.flex-row.mt-0.mr-6.space-x-8.text-sm.font-medium
+//-         li
+//-           a.text-gray-900(href='/auth/categorias/1' class='dark:text-white hover:underline uppercase' aria-current='page') Casas
+//-         li
+//-           a.text-gray-900(href='/auth/categorias/2' class='dark:text-white hover:underline uppercase') Departamentos
+//-         li
+//-           a.text-gray-900(href='/auth/categorias/3' class='dark:text-white hover:underline uppercase') Bodega 
+
+//- nav.bg-gray-50(class='dark:bg-indigo-600 flex')
+//-   .max-w-screen-xl.px-4.py-3.mx-auto(class='md:px-6')
+//-     .flex.items-center
+//-       ul.flex.flex-row.mt-0.mr-6.space-x-8.text-sm.font-medium
+//-         li
+//-           a.text-gray-900(href='/auth/categorias/5' class='dark:text-white hover:underline uppercase') Otros
+       
+    
+
+
+          
+
+          
+
+
+        
+        

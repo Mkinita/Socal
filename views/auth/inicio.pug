@@ -1,0 +1,48 @@
+extends ./layout/app
+
+block styles
+    link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
+
+block contenido
+    div(class="py-5")
+
+        
+        h1(class="text-center text-4xl font-extrabold py-4") Equipos
+
+
+        
+
+        form(action="/auth/buscador" method="POST" class="text-center py-2")
+                input(type="hidden" name="_csrf" value=csrfToken)
+                label(for="termino" class="text-sm uppercase font-bold text-white")
+                input(type="text" id="termino" name="termino" placeholder="Buscar" class="p-2 rounded-lg shadow text-sm")
+
+
+                input(type="submit" class="bg-yellow-400 rounded-lg hover:bg-yellow-300 text-white uppercase font-bold p-2 cursor-pointer text-sm" value="Buscar") 
+
+
+        div(class="flex items-center flex-shrink-0 text-white mr-4 justify-center gap-3")
+            select#tabs.bg-white.border.border-white.text-gray-600.text-sm.block.mt-0(class='focus:ring-yellow-400 focus:border-yellow-400 p-2.5 dark:bg-white dark:border-yellow-400 dark:placeholder-yellow-400 dark:text-gray-600 dark:focus:ring-yellow-400 dark:focus:border-yellow-400')
+                each categoria in categorias
+                    option(value="categoria.id")= categoria.nombre
+        
+
+
+       
+
+        section(classa="py-5")
+            
+
+            div(class="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-14")
+                each casa in casas
+                    div(class="bg-white shadow rounded-lg")
+                        img(class="object-cover h-72 w-full" src=`/uploads/${casa.imagen}` alt=`imagen casa`)
+                        div(class="p-5 space-y-3")
+                            h3(class="text-2xl font-bold uppercase text-center")= casa.titulo
+                            a(href=`/equipo/${casa.id}` class="bg-yellow-400 hover:bg-yellow-300 w-full text-center block font-bold text-white p-2 uppercase rounded") Ver
+                            
+
+
+block  scripts
+    script(src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js")
+    

@@ -1,0 +1,56 @@
+header.p-4.bg-yellow-400
+
+    
+    .container.mx-auto.felx.justify-between.items-center.text-right
+        h1.text-2xl.text-white.font-extrabold.text-center Áridos y Construcciones 
+            h2.text-2xl.text-white.font-extrabold.text-center SOCAL 
+                span.font-normal.text-xs LTDA.
+
+            
+
+            nav.flex.items-center.justify-between.bg-yellow-400.p-1
+                .flex.items-center.flex-shrink-0.text-white.mr-4
+                    a(href='/auth/inicio')
+                        img.fill-current.h-12.w-12(width='54' height='54' viewbox='0 0 54 54' src="/uploads/socal.png" alt="image description")
+                    
+                div.justify-between.flex.space-x-1
+                    a.inline-block.text-sm.px-4.py-2.leading-none.rounded.text-white.border-white.mt-4(href='/mis-equipos' class='hover:border-transparent hover:text-white hover:bg-yellow-300 lg:mt-0') Equipos
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-truck m-auto" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <circle cx="7" cy="17" r="2" />
+                            <circle cx="17" cy="17" r="2" />
+                            <path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
+                        </svg>
+
+                        
+                    a.inline-block.text-sm.px-4.py-2.leading-none.rounded.text-white.border-white.mt-4(href='/mis-equipos' class='hover:border-transparent hover:text-white hover:bg-yellow-300 lg:mt-0') Mensajes
+                        
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-message-circle m-auto" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M3 20l1.3 -3.9a9 8 0 1 1 3.4 2.9l-4.7 1" />
+                            <line x1="12" y1="12" x2="12" y2="12.01" />
+                            <line x1="8" y1="12" x2="8" y2="12.01" />
+                            <line x1="16" y1="12" x2="16" y2="12.01" />
+                        </svg>
+                       
+                
+                    a.inline-block.text-sm.px-4.py-2.leading-none.rounded.text-white.border-white.mt-4(href='#' class='hover:border-transparent hover:text-white hover:bg-yellow-300 lg:mt-0')
+                        
+                        form(action="/auth/cerrar-sesion" method="POST") 
+                            input(type="hidden" name="_csrf" value=csrfToken)
+                            input(type="submit" class="cursor-pointer"  value="Cerrar Sesion")
+
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle m-auto" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <circle cx="12" cy="12" r="9" />
+                                <circle cx="12" cy="10" r="3" />
+                                <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+                            </svg>
+                        
+        
+
+
+                

@@ -1,0 +1,22 @@
+doctype html
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title SOCAL Control Maquinaria |#{pagina}
+        link(rel='shortcut icon' href='/uploads/socal.png')
+        link(rel="stylesheet", href="/css/app.css")
+        block styles
+    body.min-h-screen.bg-gray-50
+        if barra
+            include header 
+            
+
+        main(class="nx-auto container my-10 px-2")
+            block contenido
+
+            include footer 
+
+
+        block scripts 
