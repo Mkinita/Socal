@@ -1,8 +1,8 @@
-const esVendedor = (usuarioId, equipoUsuarioId) =>{
-    return usuarioId === equipoUsuarioId
+const esVendedor = (usuarioId, mantencionUsuarioId) =>{
+    return usuarioId === mantencionUsuarioId
 }
 
-const formatiarFecha = fecha =>{
+const formatiarFechaMantencion = fecha =>{
     const nuevaFecha = new Date(fecha).toISOString().slice()
     const opciones = {
         weekday:'long',
@@ -17,5 +17,5 @@ const formatiarFecha = fecha =>{
 
 export {
     esVendedor,
-    formatiarFecha
+    formatiarFechaMantencion
 }

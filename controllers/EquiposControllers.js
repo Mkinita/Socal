@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize'
 import { unlink} from 'node:fs/promises'
 import { validationResult } from 'express-validator'
-import{ Categoria, Mensaje, Usuario, Equipo} from '../models/index.js'
+import{ Categoria, Mensaje, Usuario, Equipo,Faena} from '../models/index.js'
 import {esVendedor,formatiarFecha} from '../helpers/index.js'
 
 
@@ -31,7 +31,9 @@ const admin = async (req,res) =>{
                     FK_Usuario : id
                 },
                 include: [
-                    { model: Categoria}
+                    { model: Categoria},
+                    { model: Faena},
+                    { model: Mensaje, as:'mensajes'}
                 ]
             }),
             Equipo.count({
@@ -65,8 +67,10 @@ const admin = async (req,res) =>{
 const crear = async (req,res) =>{
 
     //condultar modelo de categoria y precio
-    const [categorias] = await Promise.all([
-        Categoria.findAll()
+    const [categorias,faenas] = await Promise.all([
+        Categoria.findAll(),
+        Faena.findAll()
+
     ])
 
     res.render('auth/crear-equipo',{
@@ -74,6 +78,7 @@ const crear = async (req,res) =>{
         barra: true,
         csrfToken: req.csrfToken(),
         categorias,
+        faenas,
         datos:{}
     })
 }
@@ -88,8 +93,9 @@ const guardar = async (req,res) =>{
     if(!resultado.isEmpty()){
 
     //condultar modelo de categoria y precio
-    const [categorias] = await Promise.all([
-        Categoria.findAll()
+    const [categorias,faenas] = await Promise.all([
+        Categoria.findAll(),
+        Faena.findAll()
     ])
 
         return res.render('auth/crear-equipo',{
@@ -97,20 +103,23 @@ const guardar = async (req,res) =>{
             barra: true,
             csrfToken: req.csrfToken(),
             categorias,
+            faenas,
             errores: resultado.array(),
             datos: req.body
          })
      }
 
      // crear un registro
-     const {titulo,descripcion, categoria} = req.body
+     const {titulo,descripcion,patente, categoria,faena} = req.body
 
      const {id: FK_Usuario} = req.usuario
      try {
         const equipoGuardado = await Equipo.create({
             titulo,
             descripcion,
+            patente,
             FK_Categoria: categoria,
+            FK_Faena: faena,
             FK_Usuario,
             imagen:''
 
@@ -209,8 +218,9 @@ const editar = async (req,res) => {
     }
 
     //condultar modelo de categoria y precio
-     const [categorias] = await Promise.all([
-        Categoria.findAll()
+     const [categorias,faenas] = await Promise.all([
+        Categoria.findAll(),
+        Faena.findAll()
     ])
 
     res.render('auth/editar',{
@@ -218,6 +228,7 @@ const editar = async (req,res) => {
         barra: true,
         csrfToken: req.csrfToken(),
         categorias,
+        faenas,
         datos: equipo
     })
 }
@@ -361,103 +372,102 @@ const buscador = async (req, res) => {
 
 }
 
-// const enviarMensaje = async (req,res) =>{
-//     const {id} = req.params
-//     //validar que la propiedad exista
-//     const propiedad = await Propiedad.findByPk(id,{
-//         include: [
-//             { model: Categoria},
-//             { model: Precio}
-//         ]
-//     })
+const enviarMensaje = async (req,res) =>{
+    const {id} = req.params
+    //validar que la propiedad exista
+    const equipo = await Equipo.findByPk(id,{
+        include: [
+            { model: Categoria}
+        ]
+    })
 
-//     if(!propiedad){
-//         return res.redirect('/404')
-//     }
+    if(!equipo){
+        return res.redirect('/404')
+    }
 
-//     // RENDERIZAR ERRORES
-//     let resultado = validationResult(req)
+    // RENDERIZAR ERRORES
+    let resultado = validationResult(req)
 
-//     if(!resultado.isEmpty()){
-//             return res.render('auth/mostrar',{
-//             propiedad,
-//             pagina:'propiedad.titulo',
-//             barra: true,
-//             csrfToken: req.csrfToken(),
-//             usuario: req.usuario,
-//             esVendedor:esVendedor(req.usuario?.id, propiedad.FK_Usuario),
-//             errores: resultado.array()
-//         }
+    if(!resultado.isEmpty()){
+            return res.render('auth/mostrar',{
+            equipo,
+            pagina:'equipo.titulo',
+            barra: true,
+            csrfToken: req.csrfToken(),
+            usuario: req.usuario,
+            //esVendedor:esVendedor(req.usuario?.id, equipo.FK_Usuario),
+            errores: resultado.array()
+        }
 
-//         )
-//      }
+        )
+     }
 
-//     //  console.log(req.body)
-//     //  console.log(req.params)
-//     //  console.log(req.usuario)
+    //  console.log(req.body)
+    //  console.log(req.params)
+    //  console.log(req.usuario)
 
-//      const {mensaje} = req.body
-//      const {id:propiedadId} = req.params
-//      const {id:FK_Usuario} = req.usuario
+     const {mensaje} = req.body
+     const {id:equipoId} = req.params
+     const {id:FK_Usuario} = req.usuario
 
-//      //ALMACENAR EL MENSAJE
-//      await Mensaje.create({
-//         mensaje,
-//         propiedadId,
-//         FK_Usuario
-
-
-//      })
+     //ALMACENAR EL MENSAJE
+     await Mensaje.create({
+        mensaje,
+        equipoId,
+        FK_Usuario
 
 
-//     res.render('auth/mostrar',{
-//         propiedad,
-//         pagina:'propiedad.titulo',
-//         barra: true,
-//         csrfToken: req.csrfToken(),
-//         usuario: req.usuario,
-//         esVendedor:esVendedor(req.usuario?.id, propiedad.FK_Usuario),
-//         enviado: true
-//     }
+     })
 
-//     )
 
-// }
+    res.render('auth/mostrar',{
+        equipo,
+        pagina:'equipo.titulo',
+        barra: true,
+        csrfToken: req.csrfToken(),
+        usuario: req.usuario,
+        esVendedor:esVendedor(req.usuario?.id, equipo.FK_Usuario),
+        enviado: true
+    }
+
+    )
+
+}
 
 //leer mensajes recibids
 
 
-// const verMensaje = async (req, res) =>{
-//      //validando
-//      const {id} = req.params
-//      //validar que la propiedad exixta
-//      const propiedad = await  Propiedad.findByPk(id,{
-//         include: [
-//             { model: Mensaje, as:'mensajes',
-//                 include:[
-//                     {model: Usuario.scope('eliminarPassword'), as:'usuario'}
-//                 ]
-//             },
-//         ],
-//      })
+const verMensajes = async (req, res) =>{
+     //validando
+     const {id} = req.params
+     //validar que la propiedad exixta
+     const equipo = await  Equipo.findByPk(id,{
+        include: [
+            { model: Mensaje, as:'mensajes',
+                include:[
+                    {model: Usuario.scope('eliminarPassword'), as:'usuario'}
+                ]
+            },
+        ],
+     })
 
-//      if(!propiedad){
-//          return res.redirect('/mis-equipos')
-//      }
+     if(!equipo){
+         return res.redirect('/mis-equipos')
+     }
 
-//      //validar quien revisa la url es el usuario
-//      if(propiedad.FK_Usuario.toString() !== req.usuario.id.toString()){
-//          return res.redirect('/mis-equipos')
-//      }
+     //validar quien revisa la url es el usuario
+     if(equipo.FK_Usuario.toString() !== req.usuario.id.toString()){
+         return res.redirect('/mis-equipos')
+     }
 
 
-//     res.render('auth/mensajes',{
-//         pagina: 'Mensajes',
-//         barra:true,
-//         mensajes:propiedad.mensajes,
-//         formatiarFecha
-//     })
-// }
+    res.render('auth/mensajes',{
+        pagina: 'Mensajes',
+        barra:true,
+        mensajes:equipo.mensajes,
+        formatiarFecha
+    })
+}
 
 export {admin,
         crear,
@@ -468,7 +478,7 @@ export {admin,
         guardarCambios,
         eliminar,
         mostrarPropiedad,
-        buscador
-        // enviarMensaje,
-        // verMensaje
+        buscador,
+        enviarMensaje,
+        verMensajes
 }

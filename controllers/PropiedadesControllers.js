@@ -1,6 +1,6 @@
 import { unlink} from 'node:fs/promises'
 import { validationResult } from 'express-validator'
-import{ Precio,Categoria, Propiedad, Mensaje,Usuario} from '../models/index.js'
+import{ Precio,Categoria, Propiedad, Mensaje,Usuario,Equipo} from '../models/index.js'
 import {esVendedor,formatiarFecha} from '../helpers/index.js'
 
 
@@ -428,7 +428,7 @@ const verMensaje = async (req, res) =>{
      //validando
      const {id} = req.params
      //validar que la propiedad exixta
-     const propiedad = await  Propiedad.findByPk(id,{
+     const equipo = await  Equipo.findByPk(id,{
         include: [
             { model: Mensaje, as:'mensajes',
                 include:[
@@ -438,20 +438,20 @@ const verMensaje = async (req, res) =>{
         ],
      })
 
-     if(!propiedad){
-         return res.redirect('/mis-propiedades')
+     if(!equipo){
+         return res.redirect('/mis-equipos')
      }
 
      //validar quien revisa la url es el usuario
-     if(propiedad.FK_Usuario.toString() !== req.usuario.id.toString()){
-         return res.redirect('/mis-propiedades')
+     if(equipo.FK_Usuario.toString() !== req.usuario.id.toString()){
+         return res.redirect('/mis-equipos')
      }
 
 
     res.render('auth/mensajes',{
         pagina: 'Mensajes',
         barra:true,
-        mensajes:propiedad.mensajes,
+        mensajes:equipo.mensajes,
         formatiarFecha
     })
 }

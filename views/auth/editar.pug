@@ -23,11 +23,16 @@ block contenido
 
 
                     div     
+                        label.block.text-sm.uppercase.text-gray-500.mb-2.font-extrabold(for="patente") Patente del equipo
+                        input#patente.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingrese el Nombre Del Equipo" name="patente" value= datos.patente? datos.patente : '')
+
+
+                    div     
                         label.block.text-sm.uppercase.text-gray-500.mb-2.font-extrabold(for="descripcion") Descripcion
                         textarea#descripcion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingrese Descripcion" type="text" name="descripcion")= datos.descripcion ? datos.descripcion  : ''
 
 
-
+                            
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
 
@@ -37,6 +42,19 @@ block contenido
                                 option(value="") -Seleccione-
                                 each categoria in categorias
                                     option(value=categoria.id selected= datos.FK_Categoria ? datos.FK_Categoria == categoria.id ? true: false : null )= categoria.nombre
+
+
+
+                        div(class="w-full")    
+                            label.block.text-sm.uppercase.text-gray-500.mb-2.font-extrabold(for="faena") Ubicación
+                            select#faena.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="faena")    
+                                option(value="") -Seleccione-
+                                each faena in faenas
+                                    option(value=faena.id selected= datos.FK_Faena ? datos.FK_Faena == faena.id ? true: false : null )= faena.nombre
+
+                        
+
+                        
 
 
                        
