@@ -25,6 +25,8 @@ block contenido
                                     img(src=`uploads/${mantencion.equipo.imagen}`, alt=`Imagen mantencion ${mantencion.equipo.titulo}` class="w-full block")         
                                 div(class="sm:w-2/4 md:w-3/6 lg:w-4/6 space-y-1 justify-between") 
                                     a(class="block text-2xl font-extrabold text-black truncate" href=`/mantencion/${mantencion.id}`)= mantencion.equipo.titulo
+                                    p(class="font-bold text-gray-800") Patente:  
+                                        span(class="font-normal")= mantencion.equipo.patente
                                     p(class="font-bold text-gray-800") Fecha Inicio:  
                                         span(class="font-normal")= formatiarFechaMantencion (mantencion.fechainicio)
                                     p(class="font-bold text-gray-800") Fecha Fin:  

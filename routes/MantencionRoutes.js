@@ -15,7 +15,7 @@ router.post('/mantenciones/crear-mantencion', protegerRutas,
     body('fechainicio').notEmpty().withMessage('la Fecha es Obligatoria'),
     // body('fechaifin').notEmpty().withMessage('la Fecha es Obligatoria'),
     body('kilometraje').notEmpty().withMessage('El Kilometraje Obligatoria'),
-    body('descripcion').notEmpty().withMessage('La Descripcion es Obligatoria').isLength({max: 50}).withMessage('La Descripcion es muy Larga'),
+    body('descripcion').notEmpty().withMessage('La Descripcion es Obligatoria').isLength({max: 200}).withMessage('La Descripcion es muy Larga'),
     body('equipo').isLength({min: 1}).withMessage('Seleciona una Equipo'),
     guardarMantencion
 
@@ -30,7 +30,7 @@ router.post('/mantenciones/editar/:id', protegerRutas,
     body('fechainicio').notEmpty().withMessage('la Fecha es Obligatoria'),
     // body('fechaifin').notEmpty().withMessage('la Fecha es Obligatoria'),
     body('kilometraje').notEmpty().withMessage('El Kilometraje Obligatoria'),
-    body('descripcion').notEmpty().withMessage('La Descripcion es Obligatoria').isLength({max: 50}).withMessage('La Descripcion es muy Larga'),
+    body('descripcion').notEmpty().withMessage('La Descripcion es Obligatoria').isLength({max: 200}).withMessage('La Descripcion es muy Larga'),
     body('equipo').isLength({min: 1}).withMessage('Seleciona una Equipo'),
     guardarCambios
 

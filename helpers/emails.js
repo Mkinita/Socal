@@ -13,11 +13,11 @@ const emailRegistro = async (datos) =>{
     const {email,nombre,token} = datos
     //enviar el mail
      await transport.sendMail({
-        from:"BienesRaices.cl",
+        from:"Socal.cl",
         to: email,
-        subject: 'Comprueba tu cuenta en BienesRaices.cl',
-        text:'Comprueba tu cuenta en BienesRaices.cl',
-        html:`<p> Hola: ${nombre}, Comprueba tu cuenta en BienesRaices.cl.</p>
+        subject: 'Comprueba tu cuenta en Socal.cl',
+        text:'Comprueba tu cuenta en Socal.cl',
+        html:`<p> Hola: ${nombre}, Comprueba tu cuenta en Socal.cl.</p>
             <p> Tu cuenta ya esta lista, solo debes comprobarla en el siguiete enlace:
             <a href="${process.env.BACKEND_URL}:${process.env.PORT ?? 3000}/auth/confirmar/${token}">Comprobar cuenta</a></p>
             <p>Si tu no creaste esta cuenta, puedes ignorar este mensaje</p>
@@ -38,11 +38,11 @@ const emailRegistro = async (datos) =>{
         const {email,nombre,token} = datos
         //enviar el mail
          await transport.sendMail({
-            from:"BienesRaices.cl",
+            from:"Socal.cl",
             to: email,
-            subject: 'Reestablece tu Password en BienesRaices.cl',
-            text:'Reestablece tu Password en BienesRaices.cl',
-            html:`<p> Hola: ${nombre}, Has solicitado reestablecer tu password en BienesRaices.cl.</p>
+            subject: 'Reestablece tu Password en Socal.cl',
+            text:'Reestablece tu Password en Socal.cl',
+            html:`<p> Hola: ${nombre}, Has solicitado reestablecer tu password en Socal.cl.</p>
                 <p>Sigue el siguiete enlace para generar un password nuevo:
                 <a href="${process.env.BACKEND_URL}:${process.env.PORT ?? 3000}/auth/olvide-password/${token}">Reestablecer Password</a></p>
                 <p>Si tu no solicitaste el cambio de password, puedes ignorar este mensaje</p>

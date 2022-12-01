@@ -70,7 +70,7 @@ const autenticar = async(req,res) =>{
        httpOnly: true
     //    secure: true,
     //    semeSite: true
-    }).redirect('/mis-equipos')
+    }).redirect('/mi-panel')
 }
 
 const cerrarSesion = (req, res) =>{
@@ -184,7 +184,7 @@ const confirmar = async (req,res) =>{
 
 const formularioOlvidePassword = (req,res) =>{
     res.render('auth/olvide-password',{
-        pagina:'Recupera tu cuenta en Bienes Raices',
+        pagina:'Recupera tu cuenta en Socal',
         csrfToken: req.csrfToken(),
     })   
 }
@@ -197,7 +197,7 @@ const resetPassword =async (req,res) =>{
     //verificar que el resultado este vacio
     if(!resultado.isEmpty()){
        return res.render('auth/olvide-password',{
-        pagina:'Recupera tu cuenta en Bienes Raices',
+        pagina:'Recupera tu cuenta en Socal',
         csrfToken: req.csrfToken(),
         errores: resultado.array()
         })   
@@ -210,7 +210,7 @@ const resetPassword =async (req,res) =>{
 
     if(!usuario){
         return res.render('auth/olvide-password',{
-            pagina:'Recupera tu cuenta en Bienes Raices',
+            pagina:'Recupera tu cuenta en Socal',
             csrfToken: req.csrfToken(),
             errores: [{msg: 'El Email no Pertenece a Ningun Usuario'}]
             })  

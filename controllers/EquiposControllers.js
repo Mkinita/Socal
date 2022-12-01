@@ -5,6 +5,17 @@ import{ Categoria, Mensaje, Usuario, Equipo,Faena} from '../models/index.js'
 import {esVendedor,formatiarFecha} from '../helpers/index.js'
 
 
+
+const principal = async (req,res) =>{
+    
+
+        res.render('auth/principal',{
+            pagina:'Panel',
+            barra: true
+        })
+
+
+}
 const admin = async (req,res) =>{
     //LEER qUERYsTRING
     const {pagina: paginaActual} = req.query
@@ -274,11 +285,12 @@ const guardarCambios = async (req,res) => {
 
     try {
 
-        const {titulo,descripcion,categoria: FK_Categoria} = req.body
+        const {titulo,descripcion,patente,categoria: FK_Categoria} = req.body
 
        equipo.set({
         titulo,
         descripcion,
+        patente,
         FK_Categoria
        })
 
@@ -469,7 +481,8 @@ const verMensajes = async (req, res) =>{
     })
 }
 
-export {admin,
+export {principal,
+        admin,
         crear,
         guardar,
         agregarImagen,

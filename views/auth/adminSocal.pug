@@ -1,6 +1,7 @@
 extends ./layout/index
 
 block contenido
+    
     .py-10
         h2.text-center.text-2xl.font-extrabold= pagina 
 
@@ -46,7 +47,7 @@ block contenido
 
                                     a(href=`/equipos/editar/${equipo.id}` class="text-center px-2 py-2 md:py-1 text-xs leading-5 font-semibold rounded cursor-pointer bg-orange-500 text-white ") Editar 
 
-                                    form(method="POST" action=`/equipos/eliminar/${equipo.id}`)
+                                    form#confirmar(method="POST" action=`/equipos/eliminar/${equipo.id}`)
                                         input(type="hidden" name="_csrf" value=csrfToken)
                                         input(type="submit" class="w-full px-2 py-2 md:py-1 text-xs leading-5 font-semibold rounded cursor-pointer bg-red-100 text-red-800" value="Eliminar")
                                             
@@ -75,6 +76,10 @@ block contenido
         
         else 
             p.text-center No Hay Equipos
+
+block  scripts
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.all.min.js"></script>
+    script(src="/js/alerta.js") 
 
 
 
