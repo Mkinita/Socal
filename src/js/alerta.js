@@ -1,4 +1,4 @@
-function confirmar (id)
+function confirmar()
 {
     Swal.fire({
         title: 'Are you sure?',

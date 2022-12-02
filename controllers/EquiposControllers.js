@@ -252,8 +252,9 @@ const guardarCambios = async (req,res) => {
     if(!resultado.isEmpty()){
 
     //condultar modelo de categoria y precio
-    const [categorias] = await Promise.all([
-        Categoria.findAll()
+    const [categorias,faenas] = await Promise.all([
+        Categoria.findAll(),
+        Faena.findAll()
     ])
 
         return  res.render('auth/editar',{
@@ -261,6 +262,7 @@ const guardarCambios = async (req,res) => {
             barra: true,
             csrfToken: req.csrfToken(),
             categorias,
+            faenas,
             errores: resultado.array(),
             datos: req.body
         })
@@ -285,13 +287,14 @@ const guardarCambios = async (req,res) => {
 
     try {
 
-        const {titulo,descripcion,patente,categoria: FK_Categoria} = req.body
+        const {titulo,descripcion,patente,categoria: FK_Categoria,faena:FK_Faena} = req.body
 
        equipo.set({
         titulo,
         descripcion,
         patente,
-        FK_Categoria
+        FK_Categoria,
+        FK_Faena
        })
 
        await equipo.save();

@@ -1,0 +1,81 @@
+extends ./layout/index
+
+block contenido
+    
+    
+        h2.text-center.font-extrabold.justify-center.text-2xl.m-5.uppercase= pagina 
+
+        <table class="table-fixed w-full  p-2 uppercase bg-white border rounded-lg shadow-md sm:p-2 dark:bg-white  text-center text-xs">
+                    <thead>
+                        <tr>
+                        <th>Nombre
+                        </th>
+                        <th>Patente
+                        </th>
+                        <th>Ubicacion
+                        </th>
+                        <th>Faena
+                        </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        //- <tr>
+                        //-     <td>..............................</td>
+                        //-     <td>...........</td>
+                        //-     <td>.............</td>
+                        //-     <td>.............</td>
+                        //- </tr>
+                        
+                    </tbody>
+                
+                    
+        </table>
+        each equipo in equipos 
+
+            
+
+
+
+
+
+
+                <table class="table-fixed w-full  p-2 uppercase bg-white border rounded-lg shadow-md sm:p-2 dark:bg-white  text-center text-xs">
+                    <thead>
+                        <tr>
+                        <th>
+                            = equipo.titulo
+                        </th>
+                        <th>
+                            = equipo.patente
+                        </th>
+                        <th>
+                            =equipo.categorium.nombre
+                        </th>
+                        <th>
+                            =equipo.faena.nombre
+                        </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        //- <tr>
+                        //-     <td>..............................</td>
+                        //-     <td>...........</td>
+                        //-     <td>.............</td>
+                        //-     <td>.............</td>
+                        //- </tr>
+                        
+                    </tbody>
+                </table>
+
+            
+
+
+             
+            
+
+
+
+
+
+
+

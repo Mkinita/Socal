@@ -5,6 +5,7 @@ import UsuarioRoutes from './routes/UsuarioRoutes.js'
 import PropiedadesRoutes from './routes/PropiedadesRoutes.js'
 import EquiposRoutes from './routes/EquiposRoutes.js'
 import MantencionRoutes from './routes/MantencionRoutes.js'
+import InformeRoutes from './routes/InformeRoutes.js'
 import appRoutes from './routes/appRoutes.js'
 import db from './config/db.js'
 
@@ -45,6 +46,7 @@ app.use('/auth',UsuarioRoutes)
 app.use('/',PropiedadesRoutes)
 app.use('/',EquiposRoutes)
 app.use('/',MantencionRoutes)
+app.use('/',InformeRoutes)
 
 
 

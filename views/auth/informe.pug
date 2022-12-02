@@ -1,0 +1,59 @@
+extends ./layout/index
+
+block contenido
+    
+    .py-10
+        h2.text-center.text-2xl.font-extrabold= pagina 
+
+
+
+    
+        <div class="w-full  p-4 uppercase bg-white border rounded-lg shadow-md sm:p-8 dark:bg-white  text-center">
+            <h5 class="mb-4 text-xl font-medium  dark:text-black">Mis Equipos</h5>
+            <div class="text-center text-gray-900 dark:text-black gap-2">
+                <span class="text-5xl font-extrabold tracking-tight"> #{total} 
+            </div>
+            
+            a.inline-block.text-sm.px-4.py-2.leading-none.rounded.text-white.border-white.mt-4(href='/mi-informe-equipo' class='bg-yellow-400 hover:border-transparent hover:text-white hover:bg-yellow-300 lg:mt-0 text-center') Ver
+        </div>
+
+
+        <div class="w-full  p-4 uppercase bg-white border rounded-lg shadow-md sm:p-8 dark:bg-white  text-center">
+            <h5 class="mb-4 text-xl font-medium  dark:text-black">Equipos En Mantencion</h5>
+            <div class="text-center text-gray-900 dark:text-black gap-2">
+                <span class="text-5xl font-extrabold tracking-tight"> #{totalM} 
+            </div>
+            
+            a.inline-block.text-sm.px-4.py-2.leading-none.rounded.text-white.border-white.mt-4(href='/mi-informe-equipo' class='bg-yellow-400 hover:border-transparent hover:text-white hover:bg-yellow-300 lg:mt-0 text-center') Ver
+        </div>
+
+
+        <div class="w-full  p-4 uppercase bg-white border rounded-lg shadow-md sm:p-8 dark:bg-white  text-center">
+            <h5 class="mb-4 text-xl font-medium  dark:text-black">Equipos Asegurados</h5>
+            <div class="text-center text-gray-900 dark:text-black gap-2">
+                <span class="text-5xl font-extrabold tracking-tight"> #{total} 
+            </div>
+            
+            a.inline-block.text-sm.px-4.py-2.leading-none.rounded.text-white.border-white.mt-4(href='/mi-informe-equipo' class='bg-yellow-400 hover:border-transparent hover:text-white hover:bg-yellow-300 lg:mt-0 text-center') Ver
+        </div>
+
+
+
+    
+        
+                    
+                    //- div(class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between")
+                        
+                    //-         span(class="font-medium") #{total} Equipos
+
+                    //-         span(class="font-medium") #{totalM} Equipos En Mantencion
+                    
+                    
+        
+        
+
+
+
+
+
+
