@@ -6,6 +6,8 @@ import{ Categoria, Mensaje, Usuario, Equipo,Faena,Mantencion} from '../models/in
 
 const informe = async (req,res) =>{   
 
+    
+
      try {
         const  {id} = req.usuario
         const [equipos, total,] = await Promise.all([
@@ -80,8 +82,7 @@ const verInforme = async (req,res) =>{
                 },
                 include: [
                     { model: Categoria},
-                    { model: Faena},
-                    { model: Mensaje, as:'mensajes'}
+                    { model: Faena}
                 ]
             }),
             Equipo.count({
@@ -92,7 +93,7 @@ const verInforme = async (req,res) =>{
         ])
 
 
-        res.render('auth/informeEquipos',{
+        res.render('auth/informeMisEquipos',{
             pagina:'lISTADO DE EQUIPOS',
             equipos,
             barra: true,
