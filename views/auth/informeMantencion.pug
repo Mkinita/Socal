@@ -12,9 +12,9 @@ block contenido
                         </th>
                         <th>Patente
                         </th>
-                        <th>Ubicacion
+                        <th>Fecha Inicio
                         </th>
-                        <th>Faena
+                        <th>Fecha Fin
                         </th>
                         </tr>
                     </thead>
@@ -30,7 +30,7 @@ block contenido
                 
                     
         </table>
-        each equipo in equipos 
+        each mantencion in mantenciones 
 
             
 
@@ -39,20 +39,20 @@ block contenido
 
 
 
-                <table class="table-fixed w-full  p-2 uppercase bg-white border rounded-lg shadow-md sm:p-2 dark:bg-white  text-center text-xs">
+                <table id="tblData"class="table-fixed w-full  p-2 uppercase bg-white border rounded-lg shadow-md sm:p-2 dark:bg-white  text-center text-xs">
                     <thead>
                         <tr>
                         <th>
-                            = equipo.titulo
+                            =mantencion.equipo.titulo
                         </th>
                         <th>
-                            = equipo.patente
+                            = mantencion.equipo.patente
                         </th>
                         <th>
-                            =equipo.categorium.nombre
+                            = formatiarFechaMantencion (mantencion.fechainicio)
                         </th>
                         <th>
-                            =equipo.faena.nombre
+                            = formatiarFechaMantencion (mantencion.fechafin)
                         </th>
                         </tr>
                     </thead>
@@ -67,15 +67,7 @@ block contenido
                     </tbody>
                 </table>
 
-            
 
-
-             
-            
-
-
-
-
-
+                
 
 

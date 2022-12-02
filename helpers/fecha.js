@@ -5,9 +5,9 @@ const esVendedor = (usuarioId, mantencionUsuarioId) =>{
 const formatiarFechaMantencion = fecha =>{
     const nuevaFecha = new Date(fecha).toISOString().slice()
     const opciones = {
-        weekday:'long',
+        // weekday:'long',
         year:'numeric',
-        month:'long',
+        month:'short',
         day:'numeric'
     }
 

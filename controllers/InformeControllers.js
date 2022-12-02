@@ -1,6 +1,8 @@
 import { Sequelize } from 'sequelize'
 import { unlink} from 'node:fs/promises'
 import{ Categoria, Mensaje, Usuario, Equipo,Faena,Mantencion} from '../models/index.js'
+import { validationResult } from 'express-validator'
+import {esVendedor,formatiarFechaMantencion} from '../helpers/fecha.js'
 
 
 
@@ -56,27 +58,10 @@ const informe = async (req,res) =>{
 
 
 const verInforme = async (req,res) =>{
-    //LEER qUERYsTRING
-    const {pagina: paginaActual} = req.query
-
-    const expresion = /^[1-9]$/
-
-    if(!expresion.test(paginaActual)){
-        return res.redirect('/mi-informe-equipo?pagina=1')
-    }
-
-
     try {
         const  {id} = req.usuario
-
-        //limites para el paginador
-        const limit = 5;
-        const offset= ((paginaActual * limit) - limit)
-
-        const [equipos, total] = await Promise.all([
+        const [equipos] = await Promise.all([
                 Equipo.findAll({
-                limit,
-                offset,
                 where:{
                     FK_Usuario : id
                 },
@@ -98,11 +83,44 @@ const verInforme = async (req,res) =>{
             equipos,
             barra: true,
             csrfToken: req.csrfToken(),
-            paginas: Math.ceil(total / limit),
-            paginaActual: Number(paginaActual),
-            total,
-            offset,
-            limit
+        })
+    } catch (error) {
+        console.log(error)
+    }
+
+
+}
+
+
+const verInformeMantencion = async (req,res) =>{
+    //LEER qUERYsTRING
+   
+
+    try {
+        const  {id} = req.usuario
+        const [mantenciones] = await Promise.all([
+                Mantencion.findAll({
+                where:{
+                    FK_Usuario : id
+                },
+                include: [
+                    { model: Equipo}
+                ]
+            }),
+            Mantencion.count({
+                where:{
+                    FK_Usuario :id
+                }
+            })
+        ])
+
+
+        res.render('auth/informeMantencion',{
+            pagina:'Lista De Mantenciones',
+            mantenciones,
+            barra: true,
+            csrfToken: req.csrfToken(),
+            formatiarFechaMantencion
         })
     } catch (error) {
         console.log(error)
@@ -117,5 +135,6 @@ const verInforme = async (req,res) =>{
 
 export {
     informe,
-    verInforme
+    verInforme,
+    verInformeMantencion
 }

@@ -6,6 +6,7 @@ import Usuario from './Usuario.js'
 import Mensaje from './Mensaje.js'
 import Equipo from './Equipo.js'
 import Mantencion from './Mantencion.js'
+import Seguro from './Seguro.js'
 
 Propiedad.belongsTo(Precio, {foreignKey:'FK_Precio'})
 Propiedad.belongsTo(Categoria, {foreignKey:'FK_Categoria'})
@@ -20,10 +21,11 @@ Equipo.hasMany(Mensaje, {foreignKey:'equipoId'})
 
 //Mensaje.belongsTo(Propiedad, {foreignKey:'propiedadId'})
 Mensaje.belongsTo(Usuario, {foreignKey:'FK_Usuario'})
-
-//mantencion
 Mantencion.belongsTo(Equipo, {foreignKey:'equipoId'})
 Mantencion.belongsTo(Usuario, {foreignKey:'FK_Usuario'})
+
+Seguro.belongsTo(Equipo, {foreignKey:'equipoId'})
+Seguro.belongsTo(Usuario, {foreignKey:'FK_Usuario'})
 
 
 
@@ -35,5 +37,6 @@ export {
     Mensaje,
     Equipo,
     Faena,
-    Mantencion
+    Mantencion,
+    Seguro
 }

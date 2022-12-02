@@ -7,7 +7,7 @@ const formatiarFecha = fecha =>{
     const opciones = {
         weekday:'long',
         year:'numeric',
-        month:'long',
+        month:'short',
         day:'numeric'
     }
 
