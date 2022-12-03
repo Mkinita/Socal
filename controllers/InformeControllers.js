@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize'
 import { unlink} from 'node:fs/promises'
-import{ Categoria, Mensaje, Usuario, Equipo,Faena,Mantencion} from '../models/index.js'
+import{ Categoria, Mensaje, Usuario, Equipo,Faena,Mantencion, Seguro} from '../models/index.js'
 import { validationResult } from 'express-validator'
 import {esVendedor,formatiarFechaMantencion} from '../helpers/fecha.js'
 
@@ -39,6 +39,22 @@ const informe = async (req,res) =>{
     ])
 
 
+        const [seguros, totalS] = await Promise.all([
+            Seguro.findAll({
+            where:{
+                FK_Usuario : id
+            }
+        }),
+        Seguro.count({
+            where:{
+                FK_Usuario :id
+            }
+        })
+    ])
+
+    
+
+
         res.render('auth/informe',{
             pagina:'Informe',
             equipos,
@@ -46,7 +62,8 @@ const informe = async (req,res) =>{
             barra: true,
             csrfToken: req.csrfToken(),
             total,
-            totalM
+            totalM,
+            totalS
         })
     } catch (error) {
         console.log(error)
@@ -131,10 +148,50 @@ const verInformeMantencion = async (req,res) =>{
 
 
 
+const verInformeSeguro = async (req,res) =>{
+    //LEER qUERYsTRING
+   
+
+    try {
+        const  {id} = req.usuario
+        const [seguros] = await Promise.all([
+                Seguro.findAll({
+                where:{
+                    FK_Usuario : id
+                },
+                include: [
+                    { model: Equipo}
+                ]
+            }),
+            Seguro.count({
+                where:{
+                    FK_Usuario :id
+                }
+            })
+        ])
+
+
+        res.render('auth/informeSeguro',{
+            pagina:'Lista De Seguros',
+            seguros,
+            barra: true,
+            csrfToken: req.csrfToken(),
+            formatiarFechaMantencion
+        })
+    } catch (error) {
+        console.log(error)
+    }
+
+
+}
+
+
+
 
 
 export {
     informe,
     verInforme,
-    verInformeMantencion
+    verInformeMantencion,
+    verInformeSeguro
 }

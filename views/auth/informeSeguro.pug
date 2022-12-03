@@ -8,7 +8,7 @@ block contenido
         <table class="table-fixed w-full  p-2 uppercase bg-white border rounded-lg shadow-md sm:p-2 dark:bg-white  text-center text-xs">
                     <thead>
                         <tr>
-                        <th>Nombre
+                        <th>N° Poliza
                         </th>
                         <th>Patente
                         </th>
@@ -30,8 +30,9 @@ block contenido
                 
                     
         </table>
-        if mantenciones.length
-            each mantencion in mantenciones 
+        if seguros.length
+            each seguro in seguros 
+            
 
                 
 
@@ -40,21 +41,22 @@ block contenido
 
 
 
-                    <table id="tblData"class="table-fixed w-full  p-2 uppercase bg-white border rounded-lg shadow-md sm:p-2 dark:bg-white  text-center text-xs">
+                    <table class="table-fixed w-full  p-2 uppercase bg-white border rounded-lg shadow-md sm:p-2 dark:bg-white  text-center text-xs">
                         <thead>
                             <tr>
                             <th>
-                                =mantencion.equipo.titulo
+                                = seguro.numeropoliza
                             </th>
                             <th>
-                                = mantencion.equipo.patente
+                                = seguro.equipo.patente
                             </th>
                             <th>
-                                = formatiarFechaMantencion (mantencion.fechainicio)
+                                = formatiarFechaMantencion (seguro.fechainicio)
                             </th>
                             <th>
-                                = formatiarFechaMantencion (mantencion.fechafin)
+                                = formatiarFechaMantencion (seguro.fechafin)
                             </th>
+                            
                             </tr>
                         </thead>
                         <tbody>
@@ -68,9 +70,17 @@ block contenido
                         </tbody>
                     </table>
         else 
-                    p.text-center.m-5 No Existen Equipos Asegurados
+                p.text-center.m-5 No Existen Equipos Asegurados
+
+            
 
 
-                
+             
+            
+
+
+
+
+
 
 

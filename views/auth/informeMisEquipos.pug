@@ -30,42 +30,45 @@ block contenido
                 
                     
         </table>
-        each equipo in equipos 
+        if equipos.length
+            each equipo in equipos 
 
-            
-
-
-
+                
 
 
 
-                <table class="table-fixed w-full  p-2 uppercase bg-white border rounded-lg shadow-md sm:p-2 dark:bg-white  text-center text-xs">
-                    <thead>
-                        <tr>
-                        <th>
-                            = equipo.titulo
-                        </th>
-                        <th>
-                            = equipo.patente
-                        </th>
-                        <th>
-                            =equipo.categorium.nombre
-                        </th>
-                        <th>
-                            =equipo.faena.nombre
-                        </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        //- <tr>
-                        //-     <td>..............................</td>
-                        //-     <td>...........</td>
-                        //-     <td>.............</td>
-                        //-     <td>.............</td>
-                        //- </tr>
-                        
-                    </tbody>
-                </table>
+
+
+
+                    <table class="table-fixed w-full  p-2 uppercase bg-white border rounded-lg shadow-md sm:p-2 dark:bg-white  text-center text-xs">
+                        <thead>
+                            <tr>
+                            <th>
+                                = equipo.titulo
+                            </th>
+                            <th>
+                                = equipo.patente
+                            </th>
+                            <th>
+                                =equipo.categorium.nombre
+                            </th>
+                            <th>
+                                =equipo.faena.nombre
+                            </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            //- <tr>
+                            //-     <td>..............................</td>
+                            //-     <td>...........</td>
+                            //-     <td>.............</td>
+                            //-     <td>.............</td>
+                            //- </tr>
+                            
+                        </tbody>
+                    </table>
+        else 
+                    p.text-center.m-5 No Existen Equipos 
 
             
 

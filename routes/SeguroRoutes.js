@@ -11,9 +11,12 @@ const router = express.Router()
 router.get('/mis-seguros', protegerRutas, admin)
 router.get('/seguros/crear-seguro', protegerRutas,crear)
 router.post('/seguros/crear-seguro', protegerRutas,
-    // body('titulo').notEmpty().withMessage('El titulo es Obligatorio'),
-    // body('descripcion').notEmpty().withMessage('La Descripcion es Obligatoria').isLength({max: 50}).withMessage('La Descripcion es muy Larga'),
-    // body('categoria').isLength({min: 1}).withMessage('Seleciona una Categoria'),
+    
+    body('numeropoliza').notEmpty().withMessage('El N° de Poliza es Obligatorio'),
+    body('fechainicio').notEmpty().withMessage('la Fecha es Obligatoria'),
+    // body('fechaifin').notEmpty().withMessage('la Fecha es Obligatoria'),
+    body('descripcion').notEmpty().withMessage('La Descripcion es Obligatoria').isLength({max: 200}).withMessage('La Descripcion es muy Larga'),
+    body('equipo').isLength({min: 1}).withMessage('Seleciona una Equipo'),
     guardar
 
 )
@@ -24,9 +27,11 @@ router.get('/seguros/editar/:id',protegerRutas,editar)
 
 
 router.post('/seguros/editar/:id', protegerRutas,
-    // body('titulo').notEmpty().withMessage('El titulo es Obligatorio'),
-    // body('descripcion').notEmpty().withMessage('La Descripcion es Obligatoria').isLength({max: 50}).withMessage('La Descripcion es muy Larga'),
-    // body('categoria').isLength({min: 1}).withMessage('Seleciona una Categoria'),
+    body('numeropoliza').notEmpty().withMessage('El N° de Poliza es Obligatorio'),
+    body('fechainicio').notEmpty().withMessage('la Fecha es Obligatoria'),
+    // body('fechaifin').notEmpty().withMessage('la Fecha es Obligatoria'),
+    body('descripcion').notEmpty().withMessage('La Descripcion es Obligatoria').isLength({max: 200}).withMessage('La Descripcion es muy Larga'),
+    body('equipo').isLength({min: 1}).withMessage('Seleciona una Equipo'),
     guardarCambios
 
 )

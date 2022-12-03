@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize'
 import { unlink} from 'node:fs/promises'
 import { validationResult } from 'express-validator'
 import{ Categoria, Mensaje, Usuario, Equipo,Faena,Seguro} from '../models/index.js'
-import {esVendedor,formatiarFecha} from '../helpers/index.js'
+import {esVendedor,formatiarFechaMantencion} from '../helpers/fecha.js'
 
 
 const admin = async (req,res) =>{
@@ -51,7 +51,8 @@ const admin = async (req,res) =>{
             paginaActual: Number(paginaActual),
             total,
             offset,
-            limit
+            limit,
+            formatiarFechaMantencion
         })
     } catch (error) {
         console.log(error)
@@ -86,8 +87,8 @@ const guardar = async (req,res) =>{
 
     if(!resultado.isEmpty()){
 
-        const [seguros] = await Promise.all([
-            Seguro.findAll()
+        const [equipos] = await Promise.all([
+            Equipo.findAll()
     
         ])
 
@@ -95,7 +96,7 @@ const guardar = async (req,res) =>{
         return res.render('auth/crear-seguro',{
             pagina:'Mis Seguros',
             barra: true,
-            seguros,
+            equipos,
             csrfToken: req.csrfToken(),
             errores: resultado.array(),
             datos: req.body,
@@ -120,7 +121,7 @@ const guardar = async (req,res) =>{
 
 
         const {id} = seguroGuardado
-        res.redirect('/mis-seguroS')
+        res.redirect('/mis-seguros')
 
 
      
@@ -134,6 +135,38 @@ const guardar = async (req,res) =>{
 }
 
 
+
+
+const editar = async (req,res) => {
+
+    const {id} = req.params
+    //validar que la propiedad exixta
+    const seguro = await  Seguro.findByPk(id)
+
+    if(!seguro){
+        return res.redirect('/mis-seguros')
+    }
+
+    //validar quien revisa la url es el usuario
+    if(seguro.FK_Usuario.toString() !== req.usuario.id.toString()){
+        return res.redirect('/mis-seguros')
+    }
+
+    //condultar modelo de categoria y precio
+     const [equipos] = await Promise.all([
+        Equipo.findAll()
+    ])
+
+    res.render('auth/editarSeguro',{
+        pagina:`Editar`,
+        barra: true,
+        csrfToken: req.csrfToken(),
+        equipos,
+        datos: seguro
+
+    })
+}
+
 const guardarCambios = async (req,res) => {
 
     //verificar identificacion
@@ -142,17 +175,15 @@ const guardarCambios = async (req,res) => {
     if(!resultado.isEmpty()){
 
     //condultar modelo de categoria y precio
-    const [categorias,faenas] = await Promise.all([
-        Categoria.findAll(),
-        Faena.findAll()
+    const [equipos] = await Promise.all([
+        Equipo.findAll()
     ])
 
-        return  res.render('auth/editar',{
-            pagina:'Editar Equipo',
+        return  res.render('auth/editarSeguro',{
+            pagina:'Editar',
             barra: true,
             csrfToken: req.csrfToken(),
-            categorias,
-            faenas,
+            equipos,
             errores: resultado.array(),
             datos: req.body
         })
@@ -161,15 +192,15 @@ const guardarCambios = async (req,res) => {
 
     const {id} = req.params
     //validar que la propiedad exixta
-    const equipo = await  Equipo.findByPk(id)
+    const seguro = await  Seguro.findByPk(id)
 
-    if(!equipo){
-        return res.redirect('/mis-equipos')
+    if(!seguro){
+        return res.redirect('/mis-seguros')
     }
 
     //validar quien revisa la url es el usuario
-    if(equipo.FK_Usuario.toString() !== req.usuario.id.toString()){
-        return res.redirect('/mis-equipos')
+    if(seguro.FK_Usuario.toString() !== req.usuario.id.toString()){
+        return res.redirect('/mis-seguros')
     }
 
 
@@ -177,53 +208,22 @@ const guardarCambios = async (req,res) => {
 
     try {
 
-        const {titulo,descripcion,patente,categoria: FK_Categoria,faena:FK_Faena} = req.body
+        const {numeropoliza,fechainicio,fechafin,descripcion,equipo:equipoId} = req.body
 
-       equipo.set({
-        titulo,
+        seguro.set({
+        numeropoliza,
+        fechainicio,
+        fechafin,
         descripcion,
-        patente,
-        FK_Categoria,
-        FK_Faena
+        equipoId
        })
 
-       await equipo.save();
-       res. redirect('/mis-equipos')
+       await seguro.save();
+       res. redirect('/mis-seguros')
 
     } catch (error) {
         console.log(error)
     }
-}
-
-const editar = async (req,res) => {
-
-    const {id} = req.params
-    //validar que la propiedad exixta
-    const equipo = await  Equipo.findByPk(id)
-
-    if(!equipo){
-        return res.redirect('/mis-equipos')
-    }
-
-    //validar quien revisa la url es el usuario
-    if(equipo.FK_Usuario.toString() !== req.usuario.id.toString()){
-        return res.redirect('/mis-equipos')
-    }
-
-    //condultar modelo de categoria y precio
-     const [categorias,faenas] = await Promise.all([
-        Categoria.findAll(),
-        Faena.findAll()
-    ])
-
-    res.render('auth/editar',{
-        pagina:`Editar Equipo ${equipo.titulo}`,
-        barra: true,
-        csrfToken: req.csrfToken(),
-        categorias,
-        faenas,
-        datos: equipo
-    })
 }
 
 
@@ -232,24 +232,23 @@ const eliminar = async (req, res) =>{
     //validando
     const {id} = req.params
     //validar que la propiedad exixta
-    const equipo = await Equipo.findByPk(id)
+    const seguro = await Seguro.findByPk(id)
 
-    if(!equipo){
-        return res.redirect('/mis-equipos')
+    if(!seguro){
+        return res.redirect('/mis-seguros')
     }
 
     //validar quien revisa la url es el usuario
-    if(equipo.FK_Usuario.toString() !== req.usuario.id.toString()){
-        return res.redirect('/mis-equipos')
+    if(seguro.FK_Usuario.toString() !== req.usuario.id.toString()){
+        return res.redirect('/mis-seguros')
     }
 
-    //eliminar imagen
-    await unlink(`public/uploads/${equipo.imagen}`)
 
 
-    //eliminando la equipo
-    await equipo.destroy()
-    res.redirect('/mis-equipos')
+
+    //eliminando la seguro
+    await seguro.destroy()
+    res.redirect('/mis-seguros')
     
 
 }
