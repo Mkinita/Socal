@@ -1,6 +1,6 @@
 import express from "express";
 import { body } from 'express-validator'
-import {admin,crear, guardar, agregarImagen,almacenarImagen, editar, guardarCambios,eliminar,buscador,mostrarPropiedad,enviarMensaje,verMensajes,principal}from '../controllers/EquiposControllers.js'
+import {admin,crear, guardar, agregarImagen,almacenarImagen, editar, guardarCambios,eliminar,alerta,buscador,mostrarPropiedad,enviarMensaje,verMensajes,principal}from '../controllers/EquiposControllers.js'
 import protegerRutas from "../middleware/protegerRuta.js";
 import upload from "../middleware/subirImagen.js";
 import identificarUsuario from "../middleware/identificarUsuario.js";
@@ -8,6 +8,7 @@ import identificarUsuario from "../middleware/identificarUsuario.js";
 const router = express.Router()
 
 router.get('/mi-panel', protegerRutas, principal)
+
 router.get('/mis-equipos', protegerRutas, admin)
 router.get('/equipos/crear-equipo', protegerRutas,crear)
 router.post('/equipos/crear-equipo', protegerRutas,
@@ -36,6 +37,7 @@ router.post('/equipos/editar/:id', protegerRutas,
 )
 
  router.post('/equipos/eliminar/:id',protegerRutas,eliminar)
+ router.get('/alerta/eliminar/:id', protegerRutas, alerta)
 
 
  router.post('/equipos/buscador-admin',protegerRutas,buscador)

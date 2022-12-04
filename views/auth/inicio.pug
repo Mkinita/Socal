@@ -16,11 +16,12 @@ block contenido
                 input(type="hidden" name="_csrf" value=csrfToken)
                 label(for="termino" class="text-sm uppercase font-bold text-white")
                 input(type="text" id="termino" name="termino" placeholder="Buscar" class="p-2 rounded-lg shadow text-sm")
+                       
+                                
 
 
                 input(type="submit" class="bg-yellow-400 rounded-lg hover:bg-yellow-300 text-white uppercase font-bold p-2 cursor-pointer text-sm" value="Buscar") 
-
-
+                    
         div(class="flex items-center flex-shrink-0 text-white mr-4 justify-center gap-3")
             select#tabs.bg-white.border.border-white.text-gray-600.text-sm.block.mt-0(class='focus:ring-yellow-400 focus:border-yellow-400 p-2.5 dark:bg-white dark:border-yellow-400 dark:placeholder-yellow-400 dark:text-gray-600 dark:focus:ring-yellow-400 dark:focus:border-yellow-400')
                 each categoria in categorias

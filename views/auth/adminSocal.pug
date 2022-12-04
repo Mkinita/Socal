@@ -5,6 +5,9 @@ block contenido
     .py-10
         h2.text-center.text-2xl.font-extrabold= pagina 
 
+         
+            
+
 
         form(action="/equipos/buscador-admin" method="POST" class="text-center py-2 space-x-2")
             input(type="hidden" name="_csrf" value=csrfToken)
@@ -22,7 +25,11 @@ block contenido
         
         //pre= JSON.stringify(equipos, undefined, 2)
 
-        if equipos.length 
+            if barra 
+                = alertas()
+
+        if equipos.length
+         
             div(class="bg-white shadow rounded-lg")
                 ul(class="divide-y divide-gray-200")
                     each equipo in equipos   
@@ -47,6 +54,9 @@ block contenido
 
 
                                     a(href=`/equipos/editar/${equipo.id}` class="text-center px-2 py-2 md:py-1 text-xs leading-5 font-semibold rounded cursor-pointer bg-orange-500 text-white ") Editar 
+
+
+                                    
 
                                     form#confirmar(method="POST" action=`/equipos/eliminar/${equipo.id}`)
                                         input(type="hidden" name="_csrf" value=csrfToken)

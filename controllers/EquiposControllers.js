@@ -54,6 +54,8 @@ const admin = async (req,res) =>{
             })
         ])
 
+        
+
 
         res.render('auth/adminSocal',{
             pagina:'Mis Equipos',
@@ -65,6 +67,7 @@ const admin = async (req,res) =>{
             total,
             offset,
             limit
+            
         })
     } catch (error) {
         console.log(error)
@@ -310,9 +313,13 @@ const eliminar = async (req, res) =>{
 
     //validando
     const {id} = req.params
+    
     //validar que la propiedad exixta
+    const alerta = true
     const equipo = await Equipo.findByPk(id)
 
+
+    
     if(!equipo){
         return res.redirect('/mis-equipos')
     }
@@ -328,9 +335,23 @@ const eliminar = async (req, res) =>{
 
     //eliminando la equipo
     await equipo.destroy()
-    res.redirect('/mis-equipos')
+    res.render('auth/alerta',{
+        
+    })
     
 
+}
+
+
+const alerta = async (req,res) =>{
+    
+    // const [equipos] = await Promise.all([
+    //     Equipo.findAll({   
+    // }),
+    // ])
+    // res.render('auth/alerta',{
+    //     equipos,
+    // })
 }
 
 //mustra una propiedad
@@ -493,6 +514,7 @@ export {principal,
         editar,
         guardarCambios,
         eliminar,
+        alerta,
         mostrarPropiedad,
         buscador,
         enviarMensaje,
