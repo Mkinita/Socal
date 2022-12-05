@@ -103,11 +103,12 @@ const guardarMantencion = async (req,res) =>{
      }
 
      // crear un registro
-     const {fechainicio,fechafin,kilometraje,descripcion,equipo} = req.body
+     const {patente,fechainicio,fechafin,kilometraje,descripcion,equipo} = req.body
 
      const {id: FK_Usuario} = req.usuario
      try {
         const mantencionGuardado = await Mantencion.create({
+            patente,
             fechainicio,
             fechafin,
             kilometraje,
@@ -202,9 +203,10 @@ const guardarCambios = async (req,res) => {
 
     try {
 
-        const {fechainicio,fechafin,kilometraje,descripcion,equipo:equipoId} = req.body
+        const {patente,fechainicio,fechafin,kilometraje,descripcion,equipo:equipoId} = req.body
 
         mantencion.set({
+        patente,
         fechainicio,
         fechafin,
         kilometraje,
@@ -247,59 +249,35 @@ const eliminar = async (req, res) =>{
 
 }
 
-// //mustra una propiedad
 
-// const mostrarPropiedad = async (req, res) =>{
-//     const {id} = req.params
-//     //validar que la propiedad exista
-//     const equipo = await Equipo.findByPk(id,{
-//         include: [
-//             { model: Categoria}
-//         ]
-//     })
+const buscador = async (req, res) => {
+    const {termino} = req.body
+    //validar que el termino no este basio 
+    if(!termino.trim){
+        return res.redirect('back')
+    }
+    //colsultar
+    
+    const mantenciones = await Mantencion.findAll({
+        where:{
+            patente:{
+                [Sequelize.Op.like] : '%' + termino + '%'
+            }
+        },include:[
+            {model:Equipo}
+        ]
+        
+    })
 
-//     if(!equipo){
-//         return res.redirect('/404')
-//     }
+    res.render('auth/buscarMantencion',{
+        pagina: 'Resultado de la busqueda',
+        barra: true,
+        mantenciones,
+        csrfToken: req.csrfToken(),
+        formatiarFechaMantencion
+    })
 
-
-//     res.render('auth/mostrar',{
-//         equipo,
-//         pagina:'equipo.titulo',
-//         barra: true,
-//         csrfToken: req.csrfToken(),
-//         usuario: req.usuario,
-//         esVendedor:esVendedor(req.usuario?.id, equipo.FK_Usuario)
-//     }
-
-//     )
-
-// }
-
-
-// const buscador = async (req, res) => {
-//     const {termino} = req.body
-//     //validar que el termino no este basio 
-//     if(!termino.trim){
-//         return res.redirect('back')
-//     }
-//     //colsultar
-//     const equipos = await Equipo.findAll({
-//         where:{
-//             titulo:{
-//                 [Sequelize.Op.like] : '%' + termino + '%'
-//             }
-//         }
-//     })
-
-//     res.render('auth/busquedaSocal',{
-//         pagina: 'Resultado de la busqueda',
-//         barra: true,
-//         equipos,
-//         csrfToken: req.csrfToken()
-//     })
-
-// }
+}
 
 
 export {
@@ -309,8 +287,7 @@ export {
     editar,
     guardarCambios,
     eliminar,
-    // mostrarPropiedad,
-    // buscador,
+    buscador,
     // enviarMensaje,
     // verMensajes
 }

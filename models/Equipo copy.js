@@ -2,35 +2,31 @@ import {DataTypes} from 'sequelize';
 import db from '../config/db.js'
 
 
-export const Mantencion = db.define('mantencion',{
+export const Equipo = db.define('equipo',{
     id:{
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         primaryKey:true
     },
-    patente:{
-        type:DataTypes.STRING(10),
-        allowNull: false
-    },
-    fechainicio:{
-        type: DataTypes.DATE,
-        allowNull: false
-    },
-    fechafin:{
-        type: DataTypes.DATE,
+    titulo:{
+        type:DataTypes.STRING(50),
         allowNull: false
     },
     descripcion:{
         type:DataTypes.TEXT,
         allowNull: false
     },
-    kilometraje:{
-        type:DataTypes.STRING(15),
+    patente:{
+        type:DataTypes.STRING(10),
+        allowNull: false
+    },
+    imagen:{
+        type:DataTypes.STRING,
         allowNull: false
     }
 
 });
 
 
-export default Mantencion;
+export default Equipo;

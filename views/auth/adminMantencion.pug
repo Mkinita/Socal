@@ -5,20 +5,21 @@ block contenido
         h2.text-center.text-2xl.font-extrabold= pagina 
 
 
-        form(action="/equipos/buscador-admin" method="POST" class="text-center py-2 space-x-2")
+        form(action="/mantenciones/buscador-mantencion" method="POST" class="text-center py-2 space-x-2")
             input(type="hidden" name="_csrf" value=csrfToken)
             label(for="termino" class="text-sm uppercase font-bold text-black") Busqueda
-            input(type="text" id="termino" name="termino" placeholder="Buscar Equipo" class="p-2 rounded-lg shadow text-sm")
+            input(type="text" id="termino" name="termino" placeholder="Ingrese Patente" class="p-2 rounded-lg shadow text-sm")
             input(type="submit" class= "bg-yellow-400 hover:bg-yellow-300 text-white uppercase font-bold p-2 cursor-pointer text-sm" value="Buscar") 
 
         a(href="/mantenciones/crear-mantencion" class="rouded py-2 px-10  bg-yellow-400 hover:bg-yellow-300 text-sm  font-bold text-center text-white my-5 inline-block w-full sm:w-auto uppercase") Ingresar Mantencion
 
-        //- pre= JSON.stringify(mantenciones, undefined, 2)
+        //-pre= JSON.stringify(mantenciones, undefined, 2)
 
         if mantenciones.length 
             div(class="bg-white shadow rounded-lg")
                 ul(class="divide-y divide-gray-200")
-                    each mantencion in mantenciones   
+                    each mantencion in mantenciones 
+                     
                         li  
                             div(class="p-6 w-full flex flex-col sm:flex-row sm:items-center sm:justify-between  md:space-y-0 gap-4")
                                 div(class="sm:w-1/4 md:w-1/6") 

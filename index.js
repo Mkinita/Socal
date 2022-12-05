@@ -7,6 +7,7 @@ import EquiposRoutes from './routes/EquiposRoutes.js'
 import MantencionRoutes from './routes/MantencionRoutes.js'
 import SeguroRoutes from './routes/SeguroRoutes.js'
 import InformeRoutes from './routes/InformeRoutes.js'
+import ChatRoutes from './routes/ChatRoutes.js'
 import appRoutes from './routes/appRoutes.js'
 import db from './config/db.js'
 
@@ -49,6 +50,7 @@ app.use('/',EquiposRoutes)
 app.use('/',MantencionRoutes)
 app.use('/',InformeRoutes)
 app.use('/',SeguroRoutes)
+app.use('/',ChatRoutes)
 
 
 

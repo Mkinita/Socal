@@ -7,6 +7,7 @@ import Mensaje from './Mensaje.js'
 import Equipo from './Equipo.js'
 import Mantencion from './Mantencion.js'
 import Seguro from './Seguro.js'
+import Chat from './Chat.js'
 
 Propiedad.belongsTo(Precio, {foreignKey:'FK_Precio'})
 Propiedad.belongsTo(Categoria, {foreignKey:'FK_Categoria'})
@@ -28,6 +29,9 @@ Seguro.belongsTo(Equipo, {foreignKey:'equipoId'})
 Seguro.belongsTo(Usuario, {foreignKey:'FK_Usuario'})
 
 
+Chat.belongsTo(Usuario, {foreignKey:'FK_Usuario'})
+
+
 
 export {
     Propiedad,
@@ -38,5 +42,6 @@ export {
     Equipo,
     Faena,
     Mantencion,
-    Seguro
+    Seguro,
+    Chat
 }

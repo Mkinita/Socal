@@ -1,7 +1,7 @@
 import express from "express";
 import { body } from 'express-validator'
-import {admin,crearMantencion,guardarMantencion,editar,guardarCambios,eliminar
-    //,buscador,mostrarPropiedad,enviarMensaje,verMensajes
+import {admin,crearMantencion,guardarMantencion,editar,guardarCambios,eliminar,buscador
+    //,mostrarPropiedad,enviarMensaje,verMensajes
 }from '../controllers/MantencionControllers.js'
 import protegerRutas from "../middleware/protegerRuta.js";
 import upload from "../middleware/subirImagen.js";
@@ -39,7 +39,7 @@ router.post('/mantenciones/editar/:id', protegerRutas,
  router.post('/mantenciones/eliminar/:id',protegerRutas,eliminar)
 
 
-//  router.post('/mantencione/buscador-admin',protegerRutas,buscador)
+router.post('/mantenciones/buscador-mantencion',protegerRutas,buscador)
 
 
 // //  area publica
