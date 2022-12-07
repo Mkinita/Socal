@@ -17,6 +17,7 @@ router.post('/faenas/crear-faena', protegerRutas,
 
 
 
+
 router.get('/faenas/editar/:id',protegerRutas,editar)
 
 

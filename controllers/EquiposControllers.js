@@ -77,6 +77,8 @@ const admin = async (req,res) =>{
 }
 
 
+
+
 //formulario crear propiedad
 const crear = async (req,res) =>{
 

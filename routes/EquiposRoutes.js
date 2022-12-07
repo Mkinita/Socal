@@ -19,6 +19,8 @@ router.post('/equipos/crear-equipo', protegerRutas,
 
 )
 
+
+
 router.get('/equipos/agregar-imagen-socal/:id',protegerRutas,agregarImagen)
 
 router.post('/equipos/agregar-imagen-socal/:id',protegerRutas,

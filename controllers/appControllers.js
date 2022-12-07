@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize'
-import {Precio, Categoria, Propiedad,Equipo} from '../models/index.js'
+import {Precio, Categoria, Propiedad,Equipo,Faena} from '../models/index.js'
 
 const inicio = async (req, res) => {
 
@@ -49,6 +49,38 @@ const categoria = async (req, res) => {
 
 }
 
+
+const faena = async (req, res) => {
+    
+    const {id} = req.params
+    
+
+    //categoria existe?
+    const faena = await Faena.findByPk(id)
+    if(!faena){
+        return res.redirect('/404')
+    }
+
+    //obtener las propiedades de la categoria
+    const equipos = await Equipo.findAll({
+        where:{
+            FK_Faena: id
+        },include:[
+            { model:Categoria},
+            {model:Faena}
+        ]
+    })
+    
+
+    res.render('auth/faena',{
+        pagina: `${faena.nombre}`,
+        barra: true,
+        equipos,
+        csrfToken: req.csrfToken()
+    })
+
+}
+
 const noEncontrado  = (req, res) => {
     res.render('auth/404',{
         pagina: '404 No Encontrado',
@@ -85,6 +117,7 @@ const buscador = async (req, res) => {
 export {
     inicio,
     categoria,
+    faena,
     noEncontrado,
     buscador
 }
