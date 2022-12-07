@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize'
 import { unlink} from 'node:fs/promises'
 import { validationResult } from 'express-validator'
-import{ Categoria, Mensaje, Usuario, Equipo,Faena,Seguro} from '../models/index.js'
+import{ Categoria, Mensaje, Usuario, Equipo,Faena, RTecnica} from '../models/index.js'
 import {esVendedor,formatiarFechaMantencion} from '../helpers/fecha.js'
 
 
@@ -12,7 +12,7 @@ const admin = async (req,res) =>{
     const expresion = /^[1-9]$/
 
     if(!expresion.test(paginaActual)){
-        return res.redirect('/mis-seguros?pagina=1')
+        return res.redirect('/mis-reviciones-tecnicas?pagina=1')
     }
 
 
@@ -23,8 +23,8 @@ const admin = async (req,res) =>{
         const limit = 5;
         const offset= ((paginaActual * limit) - limit)
 
-        const [seguros, total] = await Promise.all([
-                Seguro.findAll({
+        const [rtecnicas, total] = await Promise.all([
+                RTecnica.findAll({
                 limit,
                 offset,
                 where:{
@@ -34,7 +34,7 @@ const admin = async (req,res) =>{
                     { model: Equipo}
                 ]
             }),
-            Seguro.count({
+            RTecnica.count({
                 where:{
                     FK_Usuario :id
                 }
@@ -42,9 +42,9 @@ const admin = async (req,res) =>{
         ])
 
 
-        res.render('auth/adminSeguro',{
-            pagina:'Mis Seguros',
-            seguros,
+        res.render('auth/adminRTecnica',{
+            pagina:'Mis R.T.',
+            rtecnicas,
             barra: true,
             csrfToken: req.csrfToken(),
             paginas: Math.ceil(total / limit),
@@ -60,15 +60,15 @@ const admin = async (req,res) =>{
 
 
 }
-//formulario crear propiedad
-const crear = async (req,res) =>{
+
+const crearrtecnicas = async (req,res) =>{
 
     const [equipos] = await Promise.all([
         Equipo.findAll()
 
     ])
-    res.render('auth/crear-seguro',{
-        pagina:'Agregar Seguro A Un Equipo',
+    res.render('auth/crear-rtecnica',{
+        pagina:'Agregar Revicion Tecnica',
         barra: true,
         equipos,
         csrfToken: req.csrfToken(),
@@ -78,9 +78,7 @@ const crear = async (req,res) =>{
 
 
 
-const guardar = async (req,res) =>{
-    //validacion resultado
-
+const guardarrtecnicas = async (req,res) =>{
     //validacion resultado
 
     let resultado = validationResult(req)
@@ -93,8 +91,8 @@ const guardar = async (req,res) =>{
         ])
 
 
-        return res.render('auth/crear-seguro',{
-            pagina:'Mis Seguros',
+        return res.render('auth/crear-rtecnica',{
+            pagina:'Mis R.T.',
             barra: true,
             equipos,
             csrfToken: req.csrfToken(),
@@ -105,24 +103,23 @@ const guardar = async (req,res) =>{
      }
 
      // crear un registro
-     const {numeropoliza,fechainicio,fechafin,descripcion,patente,equipo} = req.body
+     const {patente,fechainicio,fechafin,descripcion,equipo} = req.body
 
      const {id: FK_Usuario} = req.usuario
      try {
-        const seguroGuardado = await Seguro.create({
-            numeropoliza,
+        const rtecnicaGuardado = await RTecnica.create({
+            patente,
             fechainicio,
             fechafin,
             descripcion,
-            patente,
             equipoId: equipo,
             FK_Usuario
 
         })
 
 
-        const {id} = seguroGuardado
-        res.redirect('/mis-seguros')
+        const {id} = rtecnicaGuardado
+        res.redirect('/mis-reviciones-tecnicas')
 
 
      
@@ -132,25 +129,22 @@ const guardar = async (req,res) =>{
      }
 
 
-
 }
-
-
 
 
 const editar = async (req,res) => {
 
     const {id} = req.params
     //validar que la propiedad exixta
-    const seguro = await  Seguro.findByPk(id)
+    const rtecnica = await  RTecnica.findByPk(id)
 
-    if(!seguro){
-        return res.redirect('/mis-seguros')
+    if(!rtecnica){
+        return res.redirect('/mis-reviciones-tecnicas')
     }
 
     //validar quien revisa la url es el usuario
-    if(seguro.FK_Usuario.toString() !== req.usuario.id.toString()){
-        return res.redirect('/mis-seguros')
+    if(rtecnica.FK_Usuario.toString() !== req.usuario.id.toString()){
+        return res.redirect('/mis-reviciones-tecnicas')
     }
 
     //condultar modelo de categoria y precio
@@ -158,13 +152,12 @@ const editar = async (req,res) => {
         Equipo.findAll()
     ])
 
-    res.render('auth/editarSeguro',{
+    res.render('auth/editarRtecnica',{
         pagina:`Editar`,
         barra: true,
         csrfToken: req.csrfToken(),
         equipos,
-        datos: seguro
-
+        datos: rtecnica
     })
 }
 
@@ -180,7 +173,7 @@ const guardarCambios = async (req,res) => {
         Equipo.findAll()
     ])
 
-        return  res.render('auth/editarSeguro',{
+        return  res.render('auth/editarRtecnica',{
             pagina:'Editar',
             barra: true,
             csrfToken: req.csrfToken(),
@@ -193,15 +186,15 @@ const guardarCambios = async (req,res) => {
 
     const {id} = req.params
     //validar que la propiedad exixta
-    const seguro = await  Seguro.findByPk(id)
+    const rtecnica = await  RTecnica.findByPk(id)
 
-    if(!seguro){
-        return res.redirect('/mis-seguros')
+    if(!rtecnica){
+        return res.redirect('/mis-reviciones-tecnicas')
     }
 
     //validar quien revisa la url es el usuario
-    if(seguro.FK_Usuario.toString() !== req.usuario.id.toString()){
-        return res.redirect('/mis-seguros')
+    if(rtecnica.FK_Usuario.toString() !== req.usuario.id.toString()){
+        return res.redirect('/mis-reviciones-tecnicas')
     }
 
 
@@ -209,19 +202,18 @@ const guardarCambios = async (req,res) => {
 
     try {
 
-        const {numeropoliza,fechainicio,fechafin,descripcion,patente,equipo:equipoId} = req.body
+        const {patente,fechainicio,fechafin,descripcion,equipo:equipoId} = req.body
 
-        seguro.set({
-        numeropoliza,
+        rtecnica.set({
+        patente,
         fechainicio,
         fechafin,
         descripcion,
-        patente,
         equipoId
        })
 
-       await seguro.save();
-       res. redirect('/mis-seguros')
+       await rtecnica.save();
+       res. redirect('/mis-reviciones-tecnicas')
 
     } catch (error) {
         console.log(error)
@@ -234,32 +226,64 @@ const eliminar = async (req, res) =>{
     //validando
     const {id} = req.params
     //validar que la propiedad exixta
-    const seguro = await Seguro.findByPk(id)
+    const rtecnica = await RTecnica.findByPk(id)
 
-    if(!seguro){
-        return res.redirect('/mis-seguros')
+    if(!rtecnica){
+        return res.redirect('/mis-reviciones-tecnicas')
     }
 
     //validar quien revisa la url es el usuario
-    if(seguro.FK_Usuario.toString() !== req.usuario.id.toString()){
-        return res.redirect('/mis-seguros')
+    if(rtecnica.FK_Usuario.toString() !== req.usuario.id.toString()){
+        return res.redirect('/mis-reviciones-tecnicas')
     }
 
+    
 
 
-
-    //eliminando la seguro
-    await seguro.destroy()
-    res.redirect('/mis-seguros')
+    //eliminando la mantencion
+    await rtecnica.destroy()
+    res.redirect('/mis-reviciones-tecnicas')
     
 
 }
 
 
-export {admin,
-    crear,
-    guardar,
+const buscador = async (req, res) => {
+    const {termino} = req.body
+    //validar que el termino no este basio 
+    if(!termino.trim){
+        return res.redirect('back')
+    }
+    //colsultar
+    
+    const rtecnicas = await RTecnica.findAll({
+        where:{
+            patente:{
+                [Sequelize.Op.like] : '%' + termino + '%'
+            }
+        },include:[
+            {model:Equipo}
+        ]
+        
+    })
+
+    res.render('auth/buscarRT',{
+        pagina: 'Resultado de la busqueda',
+        barra: true,
+        rtecnicas,
+        csrfToken: req.csrfToken(),
+        formatiarFechaMantencion
+    })
+
+}
+
+
+export {
+    admin,
+    crearrtecnicas,
+    guardarrtecnicas,
     editar,
     guardarCambios,
     eliminar,
+    buscador,
 }

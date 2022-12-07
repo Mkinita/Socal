@@ -7,8 +7,11 @@ import EquiposRoutes from './routes/EquiposRoutes.js'
 import MantencionRoutes from './routes/MantencionRoutes.js'
 import SeguroRoutes from './routes/SeguroRoutes.js'
 import InformeRoutes from './routes/InformeRoutes.js'
-import ChatRoutes from './routes/ChatRoutes.js'
+import UbicacionRoutes from './routes/UbicacionRoutes.js'
+import FaenaRoutes from './routes/FaenaRoutes.js'
+import RTecnicaRoutes from './routes/RTecnicaRoutes.js'
 import appRoutes from './routes/appRoutes.js'
+// import apiRoutes from './routes/apiRoutes.js'
 import db from './config/db.js'
 
 
@@ -50,7 +53,10 @@ app.use('/',EquiposRoutes)
 app.use('/',MantencionRoutes)
 app.use('/',InformeRoutes)
 app.use('/',SeguroRoutes)
-app.use('/',ChatRoutes)
+app.use('/',UbicacionRoutes)
+app.use('/',FaenaRoutes)
+app.use('/',RTecnicaRoutes)
+// app.use('/api',apiRoutes)
 
 
 
