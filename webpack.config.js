@@ -7,7 +7,9 @@ export default {
     entry:{
         mapa:'./src/js/mapa.js',
         agregarImagen:'./src/js/agregarImagen.js',
-        mostrarMapa:'./src/js/mostrarMapa.js'
+        mostrarMapa:'./src/js/mostrarMapa.js',
+        mostrarEcxel:'./src/js/mostrarEcxel.js',
+        // ecxel:'./src/js/ecxel.js'
         // filtro:'./src/js/filtro.js'
     },
     output:{

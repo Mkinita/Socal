@@ -5,7 +5,7 @@ block contenido
         //-pre= JSON.stringify(equipos, undefined, 2)
         h2.text-center.font-extrabold.justify-center.text-2xl.m-5.uppercase= pagina 
 
-        <table class="table-fixed w-full  p-2 uppercase bg-white border rounded-lg shadow-md sm:p-2 dark:bg-white  text-center text-xs">
+        <table id="tblData" class="table-fixed w-full  p-2 uppercase bg-yellow-400 border rounded-lg shadow-md sm:p-2 dark:bg-yellow-400  text-center text-xs text-white">
                     <thead>
                         <tr>
                         <th>Nombre
@@ -40,7 +40,7 @@ block contenido
 
 
 
-                    <table class="table-fixed w-full  p-2 uppercase bg-white border rounded-lg shadow-md sm:p-2 dark:bg-white  text-center text-xs">
+                    <table class="table-fixed w-full  p-2 uppercase bg-yellow-400 border rounded-lg shadow-md sm:p-2 dark:bg-yellow-300  text-center text-xs hover:bg-yellow-200">
                         <thead>
                             <tr>
                             <th>
@@ -67,8 +67,15 @@ block contenido
                             
                         </tbody>
                     </table>
+
+
+        
         else 
                     p.text-center.m-5 No Existen Equipos 
+
+
+
+
 
             
 
