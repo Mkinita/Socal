@@ -5,6 +5,16 @@ block contenido
         //-pre= JSON.stringify(equipos, undefined, 2)
         h2.text-center.font-extrabold.justify-center.text-2xl.m-5.uppercase= pagina 
 
+
+        div.w-full
+            form(action="/seguros/buscador-admin" method="POST" class="text-center py-2 space-x-2 w-full")
+                input(type="hidden" name="_csrf" value=csrfToken)
+                label(for="termino" class="text-sm uppercase font-bold text-black w-full")
+                input(type="text" id="termino" name="termino" placeholder="Buscar Equipo" class="w-full p-2 rounded-lg shadow text-sm")
+                input(type="submit" class= " hidden  bg-yellow-400 hover:bg-yellow-300 text-white uppercase font-bold p-2 cursor-pointer text-xs rounded-xl" value="Buscar") 
+            
+            
+        
         <table id="tblData" class="table-fixed w-full  p-2 uppercase bg-yellow-400 border rounded-lg shadow-md sm:p-2 dark:bg-yellow-400  text-center text-xs text-white">
                     <thead>
                         <tr>
@@ -67,6 +77,9 @@ block contenido
                             
                         </tbody>
                     </table>
+
+                                        
+        
 
 
         

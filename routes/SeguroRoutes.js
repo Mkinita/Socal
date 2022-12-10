@@ -1,6 +1,6 @@
 import express from "express";
 import { body } from 'express-validator'
-import {admin,crear, guardar, editar, guardarCambios,eliminar}from '../controllers/SeguroControllers.js'
+import {admin,crear, guardar, editar, guardarCambios,eliminar,buscador}from '../controllers/SeguroControllers.js'
 import protegerRutas from "../middleware/protegerRuta.js";
 import upload from "../middleware/subirImagen.js";
 import identificarUsuario from "../middleware/identificarUsuario.js";
@@ -39,7 +39,7 @@ router.post('/seguros/editar/:id', protegerRutas,
  router.post('/seguros/eliminar/:id',protegerRutas,eliminar)
 
 
-//  router.post('/seguros/buscador-admin',protegerRutas,buscador)
+ router.post('/seguros/buscador-seguro',protegerRutas,buscador)
 
 
 

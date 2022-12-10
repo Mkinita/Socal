@@ -5,7 +5,7 @@ block contenido
         h2.text-center.text-2xl.font-extrabold= pagina 
 
 
-        form(action="/seguros/buscador-admin" method="POST" class="text-center py-2 space-x-2")
+        form(action="/seguros/buscador-seguro" method="POST" class="text-center py-2 space-x-2")
             input(type="hidden" name="_csrf" value=csrfToken)
             label(for="termino" class="text-sm uppercase font-bold text-black") Busqueda
             input(type="text" id="termino" name="termino" placeholder="Buscar Equipo" class="p-2 rounded-lg shadow text-sm")

@@ -395,10 +395,13 @@ const buscador = async (req, res) => {
     //colsultar
     const equipos = await Equipo.findAll({
         where:{
-            titulo:{
+            patente:{
                 [Sequelize.Op.like] : '%' + termino + '%'
             }
-        }
+        },include:[
+            {model:Faena},
+            {model:Categoria}
+        ]
     })
 
     res.render('auth/busquedaSocal',{

@@ -256,10 +256,41 @@ const eliminar = async (req, res) =>{
 }
 
 
+
+const buscador = async (req, res) => {
+    const {termino} = req.body
+    //validar que el termino no este basio 
+    if(!termino.trim){
+        return res.redirect('back')
+    }
+    //colsultar
+    
+    const seguros = await Seguro.findAll({
+        where:{
+            patente:{
+                [Sequelize.Op.like] : '%' + termino + '%'
+            }
+        },include:[
+            {model:Equipo}
+        ]
+        
+    })
+
+    res.render('auth/buscarSeguro',{
+        pagina: 'Resultado de la busqueda',
+        barra: true,
+        seguros,
+        csrfToken: req.csrfToken(),
+        formatiarFechaMantencion
+    })
+
+}
+
 export {admin,
     crear,
     guardar,
     editar,
     guardarCambios,
     eliminar,
+    buscador
 }

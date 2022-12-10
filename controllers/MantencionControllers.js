@@ -266,6 +266,7 @@ const buscador = async (req, res) => {
         },include:[
             {model:Equipo}
         ]
+
         
     })
 

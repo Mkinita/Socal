@@ -42,19 +42,7 @@ router.post('/mantenciones/editar/:id', protegerRutas,
 router.post('/mantenciones/buscador-mantencion',protegerRutas,buscador)
 
 
-// //  area publica
-// router.get('/equipo/:id',identificarUsuario,mostrarPropiedad)
 
-
-
-// //almecenar los mensajes
-// router.post('/equipo/:id',
-// identificarUsuario,
-// body('mensaje').isLength({min:5}).withMessage('No Puede ir vacio o es muy corto'),
-// enviarMensaje)
-
-
-// router.get('/mensaje/:id', protegerRutas,verMensajes)
 
 
 
