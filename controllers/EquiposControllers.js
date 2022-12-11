@@ -468,7 +468,6 @@ const enviarMensaje = async (req,res) =>{
         csrfToken: req.csrfToken(),
         usuario: req.usuario,
         esVendedor:esVendedor(req.usuario?.id, equipo.FK_Usuario),
-        enviado: true
     }
 
     )
@@ -490,6 +489,7 @@ const verMensajes = async (req, res) =>{
                 ]
             },
         ],
+        
      })
 
      if(!equipo){
@@ -506,7 +506,8 @@ const verMensajes = async (req, res) =>{
         pagina: 'Mensajes',
         barra:true,
         mensajes:equipo.mensajes,
-        formatiarFecha
+        formatiarFecha,
+        enviado: true
     })
 }
 

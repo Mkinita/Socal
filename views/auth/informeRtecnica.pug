@@ -2,29 +2,19 @@ extends ./layout/index
 
 block contenido
     
-        //-pre= JSON.stringify(equipos, undefined, 2)
+        //-pre= JSON.stringify(rtecnicas, undefined, 2)
         h2.text-center.font-extrabold.justify-center.text-2xl.m-5.uppercase= pagina 
 
-
-        //- div.w-full
-        //-     form(action="/seguros/buscador-admin" method="POST" class="text-center py-2 space-x-2 w-full")
-        //-         input(type="hidden" name="_csrf" value=csrfToken)
-        //-         label(for="termino" class="text-sm uppercase font-bold text-black w-full")
-        //-         input(type="text" id="termino" name="termino" placeholder="Buscar Equipo" class="w-full p-2 rounded-lg shadow text-sm")
-        //-         input(type="submit" class= " hidden  bg-yellow-400 hover:bg-yellow-300 text-white uppercase font-bold p-2 cursor-pointer text-xs rounded-xl" value="Buscar") 
-            
-            
-        
-        <table id="tblData" class="table-fixed w-full  p-2 uppercase bg-yellow-400 border rounded-lg shadow-md sm:p-2 dark:bg-yellow-400  text-center text-xs text-white">
+        <table class="table-fixed w-full  p-2 uppercase bg-yellow-400 border rounded-lg shadow-md sm:p-2 dark:bg-yellow-400  text-center text-xs text-white">
                     <thead>
                         <tr>
                         <th>Nombre
                         </th>
                         <th>Patente
                         </th>
-                        <th>Ubicacion
+                        <th>Fecha Inicio
                         </th>
-                        <th>Faena
+                        <th>Fecha Fin
                         </th>
                         </tr>
                     </thead>
@@ -40,8 +30,9 @@ block contenido
                 
                     
         </table>
-        if equipos.length
-            each equipo in equipos 
+        if rtecnicas.length
+            each rtecnica in rtecnicas
+            
 
                 
 
@@ -54,17 +45,18 @@ block contenido
                         <thead>
                             <tr>
                             <th>
-                                = equipo.titulo
+                                = rtecnica.equipo.titulo   
                             </th>
                             <th>
-                                = equipo.patente
+                                = rtecnica.equipo.patente
                             </th>
                             <th>
-                                =equipo.categorium.nombre
+                                = formatiarFechaMantencion (rtecnica.fechainicio)
                             </th>
                             <th>
-                                =equipo.faena.nombre
+                                = formatiarFechaMantencion (rtecnica.fechafin)
                             </th>
+                            
                             </tr>
                         </thead>
                         <tbody>
@@ -77,28 +69,5 @@ block contenido
                             
                         </tbody>
                     </table>
-
-                                        
-        
-
-
-        
         else 
-                    p.text-center.m-5 No Existen Equipos 
-
-
-
-
-
-            
-
-
-             
-            
-
-
-
-
-
-
-
+                p.text-center.m-5 No Existen Equipos Asegurados      

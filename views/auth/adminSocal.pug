@@ -24,7 +24,7 @@ block contenido
             input(type="hidden" name="_csrf" value=csrfToken)
             label(for="termino" class="text-sm uppercase font-bold text-black") Busqueda
             input(type="text" id="termino" name="termino" placeholder="Ingresar Patente" class="p-2 rounded-lg shadow text-sm")
-            input(type="submit" class= "bg-yellow-400 hover:bg-yellow-300 text-white uppercase font-bold p-2 cursor-pointer text-sm" value="Buscar") 
+            input(type="submit" class= " hidden bg-yellow-400 hover:bg-yellow-300 text-white uppercase font-bold p-2 cursor-pointer text-sm" value="Buscar") 
 
         a(href="/equipos/crear-equipo" class="rouded py-2 px-10  bg-yellow-400 hover:bg-yellow-300 text-sm  font-bold text-center text-white my-5 inline-block w-full sm:w-auto uppercase") Ingresar Equipos
 
@@ -40,11 +40,15 @@ block contenido
                 = alertas()
 
         if equipos.length
+
+        
          
             div(class="bg-white shadow rounded-lg")
                 ul(class="divide-y divide-gray-200")
                     each equipo in equipos   
                         li  
+
+                            
                             div(class="p-6 w-full flex flex-col sm:flex-row sm:items-center sm:justify-between  md:space-y-0 gap-4")
                                 div(class="sm:w-1/4 md:w-1/6") 
                                     img(src=`uploads/${equipo.imagen}`, alt=`Imagen equipo ${equipo.titulo}` class="w-full block")         

@@ -8,8 +8,8 @@ block contenido
         form(action="/seguros/buscador-seguro" method="POST" class="text-center py-2 space-x-2")
             input(type="hidden" name="_csrf" value=csrfToken)
             label(for="termino" class="text-sm uppercase font-bold text-black") Busqueda
-            input(type="text" id="termino" name="termino" placeholder="Buscar Equipo" class="p-2 rounded-lg shadow text-sm")
-            input(type="submit" class= "bg-yellow-400 hover:bg-yellow-300 text-white uppercase font-bold p-2 cursor-pointer text-sm" value="Buscar") 
+            input(type="text" id="termino" name="termino" placeholder="Ingrese Patente" class="p-2 rounded-lg shadow text-sm")
+            input(type="submit" class= " hidden bg-yellow-400 hover:bg-yellow-300 text-white uppercase font-bold p-2 cursor-pointer text-sm" value="Buscar") 
 
         a(href="/seguros/crear-seguro" class="rouded py-2 px-10  bg-yellow-400 hover:bg-yellow-300 text-sm  font-bold text-center text-white my-5 inline-block w-full sm:w-auto uppercase") Agregar Seguro
 

@@ -42,4 +42,7 @@ router.post('/rtecnicas/buscador-rtecnicas',protegerRutas,buscador)
 
 
 
+
+
+
 export default router

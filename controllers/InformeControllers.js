@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize'
 import { unlink} from 'node:fs/promises'
-import{ Categoria, Mensaje, Usuario, Equipo,Faena,Mantencion, Seguro} from '../models/index.js'
+import{ Categoria, Mensaje, Usuario, Equipo,Faena,Mantencion, Seguro,RTecnica} from '../models/index.js'
 import { validationResult } from 'express-validator'
 import {esVendedor,formatiarFechaMantencion} from '../helpers/fecha.js'
 
@@ -52,6 +52,20 @@ const informe = async (req,res) =>{
         })
     ])
 
+
+    const [rtecnicas, totalR] = await Promise.all([
+        RTecnica.findAll({
+        where:{
+            FK_Usuario : id
+        }
+    }),
+    RTecnica.count({
+        where:{
+            FK_Usuario :id
+        }
+    })
+])
+
     
 
 
@@ -63,7 +77,8 @@ const informe = async (req,res) =>{
             csrfToken: req.csrfToken(),
             total,
             totalM,
-            totalS
+            totalS,
+            totalR
         })
     } catch (error) {
         console.log(error)
@@ -186,6 +201,43 @@ const verInformeSeguro = async (req,res) =>{
 }
 
 
+const verInformeRtecnica = async (req,res) =>{
+    //LEER qUERYsTRING
+   
+
+    try {
+        const  {id} = req.usuario
+        const [rtecnicas] = await Promise.all([
+                RTecnica.findAll({
+                where:{
+                    FK_Usuario : id
+                },
+                include: [
+                    { model: Equipo}
+                ]
+            }),
+            RTecnica.count({
+                where:{
+                    FK_Usuario :id
+                }
+            })
+        ])
+
+
+        res.render('auth/informeRtecnica',{
+            pagina:'Lista De R.T.',
+            rtecnicas,
+            barra: true,
+            csrfToken: req.csrfToken(),
+            formatiarFechaMantencion
+        })
+    } catch (error) {
+        console.log(error)
+    }
+
+
+}
+
 
 
 
@@ -193,5 +245,6 @@ export {
     informe,
     verInforme,
     verInformeMantencion,
-    verInformeSeguro
+    verInformeSeguro,
+    verInformeRtecnica
 }
