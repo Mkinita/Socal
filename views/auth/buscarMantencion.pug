@@ -8,7 +8,7 @@ block contenido
             h2(class="text-center text-4xl font-extrabold py-10")= pagina
 
           
-
+            pre= JSON.stringify(mantenciones, undefined, 2)
             div(class="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-14")
                 each mantencion in mantenciones 
                     div(class="bg-white shadow rounded-lg")

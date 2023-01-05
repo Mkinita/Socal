@@ -31,7 +31,7 @@ const admin = async (req,res) =>{
         const  {id} = req.usuario
 
         //limites para el paginador
-        const limit = 5;
+        const limit = 10;
         const offset= ((paginaActual * limit) - limit)
 
         const [equipos, total] = await Promise.all([
@@ -126,7 +126,7 @@ const guardar = async (req,res) =>{
      }
 
      // crear un registro
-     const {titulo,descripcion,patente, categoria,faena} = req.body
+     const {titulo,descripcion,patente, ano, marca, modelo, motor, serie, propietario, operador, categoria,faena} = req.body
 
      const {id: FK_Usuario} = req.usuario
      try {
@@ -134,6 +134,13 @@ const guardar = async (req,res) =>{
             titulo,
             descripcion,
             patente,
+            ano,
+            marca,
+            modelo,
+            motor,
+            serie,
+            propietario,
+            operador,
             FK_Categoria: categoria,
             FK_Faena: faena,
             FK_Usuario,

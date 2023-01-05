@@ -21,6 +21,40 @@ export const Equipo = db.define('equipo',{
         type:DataTypes.STRING(10),
         allowNull: false
     },
+    ano:{
+        type:DataTypes.STRING(4),
+        allowNull: false
+    },
+
+    marca:{
+            type:DataTypes.STRING(20),
+            allowNull: false
+        },
+
+    modelo:{
+            type:DataTypes.STRING(20),
+            allowNull: false
+        },
+
+    motor:{
+            type:DataTypes.STRING(20),
+            allowNull: false
+        },
+
+    serie:{
+            type:DataTypes.STRING(20),
+            allowNull: false
+        },
+
+    propietario:{
+            type:DataTypes.STRING(20),
+            allowNull: false
+        },
+
+    operador:{
+            type:DataTypes.STRING(20),
+            allowNull: false
+        },
     imagen:{
         type:DataTypes.STRING,
         allowNull: false
