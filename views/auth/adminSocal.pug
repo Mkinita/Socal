@@ -40,10 +40,10 @@ block contenido
 
 
         
-        //pre= JSON.stringify(equipos, undefined, 2)
+            //- pre= JSON.stringify(equipos, undefined, 2)
 
             if barra 
-                = alertas()
+                //- = alertas()
 
         if equipos.length
 
@@ -60,14 +60,16 @@ block contenido
                                     img(src=`uploads/${equipo.imagen}`, alt=`Imagen equipo ${equipo.titulo}` class="w-full block")         
                                 div(class="sm:w-2/4 md:w-3/6 lg:w-4/6 space-y-1") 
                                     a(class="block text-2xl font-extrabold text-black truncate" href=`/equipo/${equipo.id}`)= equipo.titulo
-                                    p(class="text-sm text-black font-bold")= equipo.categorium.nombre
-                                    p(class="text-sm text-black font-bold")= equipo.patente
-                                    p(class="text-sm text-black font-bold")= equipo.faena.nombre
+                                    //- p(class="text-sm text-black font-bold")= equipo.categorium.nombre
+                                    p(class="text-sm text-black font-bold") Patente: #{equipo.patente}
+                                    p(class="text-sm text-black font-bold") Ubicacion:  #{equipo.faena.nombre}
+                                    p(class="text-sm text-black font-bold") Operador: #{equipo.operador}
+                                
 
                             
                                 
                                     
-                                    a(href=`/mensaje/${equipo.id}` class="text-sm text-gray-600")= `${equipo.mensajes.length} Mensajes` 
+                                    //- a(href=`/mensaje/${equipo.id}` class="text-sm text-gray-600")= `${equipo.mensajes.length} Mensajes` 
 
                                 div(class="sm:w-1/4 md:w-2/6 lg:flex-1 flex flex-col lg:flex-row gap-2") 
                                     form(action="")
