@@ -1,7 +1,7 @@
 import {check,validationResult} from 'express-validator'
 import bcrypt  from 'bcrypt'
 import Usuario from "../models/Usuario.js"
-import {generar,generarId} from '../helpers/tokens.js'
+import {generarJWT,generarId} from '../helpers/tokens.js'
 import {emailRegistro, emailOlvidePassword} from '../helpers/emails.js'
 
 const formularioLogin = (req,res) =>{
@@ -95,7 +95,7 @@ const registrar =  async (req,res) =>{
     
     let resultado = validationResult(req)
 
-    //verificar que el resultado este vacio holaaaaa
+    //verificar que el resultado este vacio
     if(!resultado.isEmpty()){
        return res.render('auth/registro',{
             pagina:'Crear Cuenta',
