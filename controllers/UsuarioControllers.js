@@ -95,7 +95,7 @@ const registrar =  async (req,res) =>{
     
     let resultado = validationResult(req)
 
-    //verificar que el resultado este vacio
+    //verificar que el resultado este vacio holaaaaa
     if(!resultado.isEmpty()){
        return res.render('auth/registro',{
             pagina:'Crear Cuenta',
