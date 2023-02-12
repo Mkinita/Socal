@@ -1,7 +1,7 @@
 import {check,validationResult} from 'express-validator'
 import bcrypt  from 'bcrypt'
 import Usuario from "../models/Usuario.js"
-import {generarJWT,generarId} from '../helpers/tokens.js'
+import {generar,generarId} from '../helpers/tokens.js'
 import {emailRegistro, emailOlvidePassword} from '../helpers/emails.js'
 
 const formularioLogin = (req,res) =>{
