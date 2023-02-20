@@ -23,8 +23,13 @@ block contenido
                                 p(class="font-bold text-gray-800 text-lg") Ubicacion:  
                                         span(class="font-normal")= equipo.categorium.nombre
                                 p(class="font-bold text-gray-800 text-lg") Faena:  
-                                        span(class="font-normal")= equipo.faena.nombre     
+                                        span(class="font-normal")= equipo.faena.nombre   
                                         
+                                div(class="m-auto w-full p-5") 
+                                    form(action="")  
+
+                                    a(href=`/equipos/editar/${equipo.id}` class="text-center px-2 py-2 md:py-1 text-xs leading-5 font-semibold rounded cursor-pointer bg-orange-500 text-white w-full") Editar 
+                                                    
                                 
         else 
             p(class="text-center text-gray-800 txt-sm py-10 uppercase text-3xl") No Existen Resultados
