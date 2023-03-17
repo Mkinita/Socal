@@ -516,7 +516,25 @@ const verMensajes = async (req, res) =>{
         formatiarFecha,
         enviado: true
     })
+
+
+
+
+    
 }
+
+
+
+
+    const getEquipos = async (req, res) => {
+        try {
+        const equipos = await Equipo.findAll();
+        res.json(equipos);
+        } catch (error) {
+        console.log(error);
+        res.status(500).json({ mensaje: 'Hubo un error' });
+        }
+    };
 
 export {principal,
         admin,
@@ -531,5 +549,6 @@ export {principal,
         mostrarPropiedad,
         buscador,
         enviarMensaje,
-        verMensajes
+        verMensajes,
+        getEquipos
 }

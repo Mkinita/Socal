@@ -1,6 +1,6 @@
 import express from "express";
 import { body } from 'express-validator'
-import {admin,crear, guardar, agregarImagen,almacenarImagen, editar, guardarCambios,eliminar,alerta,buscador,mostrarPropiedad,enviarMensaje,verMensajes,principal}from '../controllers/EquiposControllers.js'
+import {admin,crear, guardar, agregarImagen,almacenarImagen, editar, guardarCambios,eliminar,alerta,buscador,mostrarPropiedad,enviarMensaje,verMensajes,principal,getEquipos}from '../controllers/EquiposControllers.js'
 import protegerRutas from "../middleware/protegerRuta.js";
 import upload from "../middleware/subirImagen.js";
 import identificarUsuario from "../middleware/identificarUsuario.js";
@@ -47,6 +47,7 @@ router.post('/equipos/editar/:id', protegerRutas,
 
 //  area publica
 router.get('/equipo/:id',identificarUsuario,mostrarPropiedad)
+router.get('/equipos', getEquipos);
 
 
 
