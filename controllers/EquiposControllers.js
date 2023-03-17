@@ -529,6 +529,7 @@ const verMensajes = async (req, res) =>{
     const getEquipos = async (req, res) => {
         try {
         const equipos = await Equipo.findAll();
+        
         res.json(equipos);
         } catch (error) {
         console.log(error);

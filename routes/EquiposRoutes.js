@@ -9,9 +9,9 @@ const router = express.Router()
 
 router.get('/mi-panel', protegerRutas, principal)
 
-router.get('/mis-equipos', protegerRutas, admin)
-router.get('/equipos/crear-equipo', protegerRutas,crear)
-router.post('/equipos/crear-equipo', protegerRutas,
+router.get('/mis-equipos', admin)
+router.get('/equipos/crear-equipo',crear)
+router.post('/equipos/crear-equipo',
     body('titulo').notEmpty().withMessage('El titulo es Obligatorio'),
     body('descripcion').notEmpty().withMessage('La Descripcion es Obligatoria').isLength({max: 50}).withMessage('La Descripcion es muy Larga'),
     body('categoria').isLength({min: 1}).withMessage('Seleciona una Categoria'),
@@ -21,16 +21,16 @@ router.post('/equipos/crear-equipo', protegerRutas,
 
 
 
-router.get('/equipos/agregar-imagen-socal/:id',protegerRutas,agregarImagen)
+router.get('/equipos/agregar-imagen-socal/:id',agregarImagen)
 
-router.post('/equipos/agregar-imagen-socal/:id',protegerRutas,
+router.post('/equipos/agregar-imagen-socal/:id',
 upload.single('imagen'),almacenarImagen
 )
 
-router.get('/equipos/editar/:id',protegerRutas,editar)
+router.get('/equipos/editar/:id',editar)
 
 
-router.post('/equipos/editar/:id', protegerRutas,
+router.post('/equipos/editar/:id',
     body('titulo').notEmpty().withMessage('El titulo es Obligatorio'),
     body('descripcion').notEmpty().withMessage('La Descripcion es Obligatoria').isLength({max: 50}).withMessage('La Descripcion es muy Larga'),
     body('categoria').isLength({min: 1}).withMessage('Seleciona una Categoria'),
@@ -38,11 +38,11 @@ router.post('/equipos/editar/:id', protegerRutas,
 
 )
 
- router.post('/equipos/eliminar/:id',protegerRutas,eliminar)
- router.get('/alerta/eliminar/:id', protegerRutas, alerta)
+ router.post('/equipos/eliminar/:id',eliminar)
+ router.get('/alerta/eliminar/:id', alerta)
 
 
- router.post('/equipos/buscador-admin',protegerRutas,buscador)
+ router.post('/equipos/buscador-admin',buscador)
 
 
 //  area publica
